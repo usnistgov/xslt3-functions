@@ -71,7 +71,7 @@ Feature requests, bug reports, and ideas for further development can be submitte
 
 Cite this repository as:
 
-Piez, Wendell, Amanda Galtman, David Waltermire, et al. *XSLT3 Functions*. https://github.com/usnistgov/xslt3-functions.
+Piez, Wendell, David Waltermire, et al. *XSLT3 Functions*. https://github.com/usnistgov/xslt3-functions.
 
 ## Related Material
 
@@ -87,4 +87,6 @@ This project supports the [OSCAL project](https://pages.nist.gov/OSCAL), a famil
 
 XSLT, [Extensible Stylesheet Language Transformations](https://www.w3.org/XML/Group/qtspecs/specifications/xslt-30/html/), is a [fourth-generation programming language](https://en.wikipedia.org/wiki/Fourth-generation_programming_language) designed for the task of expediting tree-to-tree data transformations, where the trees concerned are abstracted representations of XML documents. That is, in addition to in-memory query, copy and manipulation, they are capable of being routinely and reliably produced by parsing XML, and persisted -- saved and exchanged across the system -- by serializing XML.
 
-Originally intended for the purpose of making human-legible output formats such as PDF or HTML, XSLT also has more general uses, in data extraction and acquisition, normalization, rules enforcement (validation), and others. While maintaining its heritage as a declarative, functional language well-suited for prototyping, rapid deployment and agile development, the most recent version of XSLT also adds new features such as higher-order functions and pseudo-random number generation.
+Originally intended for the purpose of making human-legible output formats such as PDF or HTML, XSLT also has more general uses, in data extraction and acquisition, normalization, rules enforcement (validation), code generation and transpiling, literate programming, middleware and more. While maintaining its heritage as a declarative, functional language well-suited for prototyping, rapid deployment and agile development, the most recent version of XSLT also adds new features such as higher-order functions and pseudo-random number generation.
+
+An active XSLT community can still be found on the [XML.com Slack channel]() and in venues such as the [XSL-List]() listserv (email).
