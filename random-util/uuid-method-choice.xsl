@@ -28,12 +28,12 @@
     <!-- Alternatively, call a web service if the processor supports it -->
     <xsl:param name="uuid-service" select="'https://www.uuidgenerator.net/api/version4'"/>
 
-    <!-- Use true() if message handler should return sequence of processing instructions
+    <!-- Use true() if message handler should return processing instruction
         that a caller can react to. Use false() if message handler should use xsl:message. -->
     <xsl:param name="u:message_returns_pi" select="false()"/>
 
     <xsl:template name="u:determine-uuid" as="item()+">
-        <!-- Return value is xs:string, in addition to a sequence of processing instructions
+        <!-- Return value is xs:string, in addition to a processing instruction
             if there is a warning situation and $u:message_returns_pi is true(). -->
         <xsl:param name="uuid-method" select="$uuid-method" as="xs:string"/>
         <xsl:param name="uuid-service" select="$uuid-service" as="xs:string"/>
