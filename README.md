@@ -1,152 +1,92 @@
-# NIST Open-Source Software Repository Template
+# OSCAL XSLT3 Functions
 
-Use of GitHub by NIST employees for government work is subject to
-the [Rules of Behavior for GitHub][gh-rob]. This is the
-recommended template for NIST employees, since it contains
-required files with approved text. For details, please consult
-the Office of Data & Informatics' [Quickstart Guide to GitHub at
-NIST][gh-odi].
+Courtesy of NIST ITL/CSD (Information Technology Laboratory, Computer Security Division), a library of general-use XSLT functions.
 
-Please click on the green **Use this template** button above to
-create a new repository under the [usnistgov][gh-nst]
-organization for your own open-source work. Please do not "fork"
-the repository directly, and do not create the templated
-repository under your individual account.
+Tested and available for XSLT 3.0 and potentially related languages.
 
-The key files contained in this repository -- which will also
-appear in templated copies -- are listed below, with some things
-to know about each.
+## Software description
 
----
+This repository offers a library of XSLT stylesheets and pipelines supporting generalized operations such as producing random UUIDs, comparing custom datatypes, validating against (dynamic or static) constraints, or other potential uses to be developed.
 
-## README
+It is motivated primarily by the need to make available to the community and public logic that we have coded for use in our projects, but that could (more or less easily) be refitted to uses elsewhere.
 
-Each repository will contain a plain-text [README file][wk-rdm],
-preferably formatted using [GitHub-flavored Markdown][gh-mdn] and
-named `README.md` (this file) or `README`.
+Most of the code here is not intended to be used standalone, but rather as imports (generally `xsl:import`) from external code. As documented per utility, however, demonstrations may be included to show how to use them, which can be executed independently of any other configuration. Additionally, some functionality has been unit tested (sometimes fairly exhaustively), with unit tests included.
 
-Per the [GitHub ROB][gh-rob] and [NIST Suborder 1801.02][nist-s-1801-02],
-your README should contain:
+To use these transformations a conformant XSLT 3.0 transformation engine is required such as [Saxon 11](https://saxonica.com/documentation11/documentation.xml) from Saxonica (see SourceForge for the free-to-use HE version), which is available on several platforms and sometimes bundled with commercial software. Outside that practical requirement, this library is free to use and open for contributions.
 
-1. Software or Data description
-   - Statements of purpose and maturity
-   - Description of the repository contents
-   - Technical installation instructions, including operating
-     system or software dependencies
-1. Contact information
-   - PI name, NIST OU, Division, and Group names
-   - Contact email address at NIST
-   - Details of mailing lists, chatrooms, and discussion forums,
-     where applicable
-1. Related Material
-   - URL for associated project on the NIST website or other Department
-     of Commerce page, if available
-   - References to user guides if stored outside of GitHub
-1. Directions on appropriate citation with example text
-1. References to any included non-public domain software modules,
-   and additional license language if needed, *e.g.* [BSD][li-bsd],
-   [GPL][li-gpl], or [MIT][li-mit]
+Applications here for the most part assume inputs to be OSCAL XML, as distinct from OSCAL in other data formats such as JSON and YAML. Please convert your data first into XML before attempting to work further with these tools. XSLT-based data converters for OSCAL (capable of generating OSCAL XML from valid OSCAL JSON) are available in the [main repository](https://github.com/usnistgov/OSCAL/tree/main/xml/convert).
 
-The more detailed your README, the more likely our colleagues
-around the world are to find it through a Web search. For general
-advice on writing a helpful README, please review
-[*Making Readmes Readable*][18f-guide] from 18F and Cornell's
-[*Guide to Writing README-style Metadata*][cornell-meta].
+If there is interest in XSLT to support OSCAL JSON, YAML or other notations, please express this requirement to the developers.
 
-## LICENSE
+###  Project purpose and maturity
 
-Each repository will contain a plain-text file named `LICENSE.md`
-or `LICENSE` that is phrased in compliance with the Public Access
-to NIST Research [*Copyright, Fair Use, and Licensing Statement
-for SRD, Data, and Software*][nist-open], which provides
-up-to-date official language for each category in a blue box.
+The OSCAL project has published XSLT since 2018. Over this time it has grown in complexity, warranting a reorganization and refactoring of the development efforts that have supported it.
 
-- The version of [LICENSE.md](LICENSE.md) included in this
-  repository is approved for use.
-- Updated language on the [Licensing Statement][nist-open] page
-  supersedes the copy in this repository. You may transcribe the
-  language from the appropriate "blue box" on that page into your
-  README.
+Current refactoring (2022) encapsulates XSLT functionality supporting OSCAL into two repositories, the [OSCAL XSLT](https://github.com/usnistgov/oscal-xslt) repository, and this one. This repository includes logic of general use (i.e., not specific to OSCAL use cases or implementation), and is kept kept separate in order to facilitate reuse of these offerings outside the OSCAL context, potentially (but not necessarily) as a git submodule.
 
-If your repository includes any software or data that is licensed
-by a third party, create a separate file for third-party licenses
-(`THIRD_PARTY_LICENSES.md` is recommended) and include copyright
-and licensing statements in compliance with the conditions of
-those licenses.
+Future development of this resource depends largely on uptake and engagement from users who find it valuable. If you have an interest in keeping this code base viable, please make your needs and ideas known to the developers. Demonstrations that take us further into features of XSLT 3 that are demonstrably useful, whether in functionality or architecture (e.g., packaging), are particularly welcome.
 
-## CODEOWNERS
+See the readme in each project to gauge its scope of application, approach to design, and level of testing. Several of the applications are also accompanied by test suites using the [XSpec XSLT Unit Testing framework](https://github.com/xspec/xspec/).
 
-This template repository includes a file named
-[CODEOWNERS](CODEOWNERS), which visitors can view to discover
-which GitHub users are "in charge" of the repository. More
-crucially, GitHub uses it to assign reviewers on pull requests.
-GitHub documents the file (and how to write one) [here][gh-cdo].
+###  Repository contents
 
-***Please update that file*** to point to your own account or
-team, so that the [Open-Source Team][gh-ost] doesn't get spammed
-with spurious review requests. *Thanks!*
+See the subdirectory list for projects and applications currently supported.
 
-## CODEMETA
+### Rights and license
 
-Project metadata is captured in `CODEMETA.yaml`, used by the NIST
-Software Portal to sort your work under the appropriate thematic
-homepage. ***Please update this file*** with the appropriate
-"theme" and "category" for your code/data/software. The Tier 1
-themes are:
+See the [LICENSE.md](LICENSE.md) file. As work product of a Bureau of the Department of Commerce (U.S. Government), or of volunteers working in support of our projects, code in this repository is in the public domain unless specifically marked otherwise.
 
-- [Advanced communications](https://www.nist.gov/advanced-communications)
-- [Bioscience](https://www.nist.gov/bioscience)
-- [Buildings and Construction](https://www.nist.gov/buildings-construction)
-- [Chemistry](https://www.nist.gov/chemistry)
-- [Electronics](https://www.nist.gov/electronics)
-- [Energy](https://www.nist.gov/energy)
-- [Environment](https://www.nist.gov/environment)
-- [Fire](https://www.nist.gov/fire)
-- [Forensic Science](https://www.nist.gov/forensic-science)
-- [Health](https://www.nist.gov/health)
-- [Information Technology](https://www.nist.gov/information-technology)
-- [Infrastructure](https://www.nist.gov/infrastructure)
-- [Manufacturing](https://www.nist.gov/manufacturing)
-- [Materials](https://www.nist.gov/materials)
-- [Mathematics and Statistics](https://www.nist.gov/mathematics-statistics)
-- [Metrology](https://www.nist.gov/metrology)
-- [Nanotechnology](https://www.nist.gov/nanotechnology)
-- [Neutron research](https://www.nist.gov/neutron-research)
-- [Performance excellence](https://www.nist.gov/performance-excellence)
-- [Physics](https://www.nist.gov/physics)
-- [Public safety](https://www.nist.gov/public-safety)
-- [Resilience](https://www.nist.gov/resilience)
-- [Standards](https://www.nist.gov/standards)
-- [Transportation](https://www.nist.gov/transportation)
+To confirm the currency of the license, see the NIST Open license page at https://www.nist.gov/open/license#software.
 
----
+###  Installation and use
 
-[usnistgov/opensource-repo][gh-osr] is developed and maintained
-by the [opensource-team][gh-ost], principally:
+#### Notes on using this library
 
-- Gretchen Greene, @GRG2
-- Yannick Congo, @faical-yannick-congo
-- Trevor Keller, @tkphd
+If you are using this library, you should probably be able to skip the next subsection. Presumably you are developing XSLT of your own and wish to embed these capabilities (or extend them), not simply apply them for the purpose of capturing outputs.
 
-Please reach out with questions and comments.
+#### Notes on running and testing XSLT
 
-<!-- References -->
+Generally speaking these are XSLT applications, either single transformations, stacked transformations (in which imported layers provide fallbacks and importing layers, customizations), or pipelines of transformations, requiring XSLT versions as recent as [XSLT Version 3.0](https://www.w3.org/XML/Group/qtspecs/specifications/xslt-30/html/) with [XPath Version 3.1](https://www.w3.org/TR/xpath-31/).
 
-[18f-guide]: https://github.com/18F/open-source-guide/blob/18f-pages/pages/making-readmes-readable.md
-[cornell-meta]: https://data.research.cornell.edu/content/readme
-[gh-cdo]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-[gh-mdn]: https://github.github.com/gfm/
-[gh-nst]: https://github.com/usnistgov
-[gh-odi]: https://odiwiki.nist.gov/ODI/GitHub.html
-[gh-osr]: https://github.com/usnistgov/opensource-repo/
-[gh-ost]: https://github.com/orgs/usnistgov/teams/opensource-team
-[gh-rob]: https://odiwiki.nist.gov/pub/ODI/GitHub/GHROB.pdf
-[gh-tpl]: https://github.com/usnistgov/carpentries-development/discussions/3
-[li-bsd]: https://opensource.org/licenses/bsd-license
-[li-gpl]: https://opensource.org/licenses/gpl-license
-[li-mit]: https://opensource.org/licenses/mit-license
-[nist-code]: https://code.nist.gov
-[nist-disclaimer]: https://www.nist.gov/open/license
-[nist-s-1801-02]: https://inet.nist.gov/adlp/directives/review-data-intended-publication
-[nist-open]: https://www.nist.gov/open/license#software
-[wk-rdm]: https://en.wikipedia.org/wiki/README
+As such they will run on any platform supporting this industry-standard, publicly available and externally specified language. The leading open-source XSLT implementation currently is Saxon from [Saxonica](https://saxonica.com/welcome/welcome.xml), available for several platforms and frequently bundled with XML editors or IDE software. However, we also welcome reports respecting other XSLT implementations supporting the appropriate XSLT version (generally 3.0).
+
+See each project for details on its runtime requirements. Most often, single and stacked XSLTs can be executed using simple calls from a command prompt, or easily configured within tools. Pipelines may be implemented in XSLT 3.0, or may be supported via [XProc](https://xproc.org/), or both.
+
+## Contact information
+
+Principal software engineers responsible for these projects are
+
+- Wendell Piez, w e n d e l l (dot) p i e z (at) n i s t (dot) g o v
+- David Waltermire, d a v i d (dot) w a l t e r m i r e (at) n i s t (dot) g o v
+
+In the case of applications with significant contributions from community members there may be further contact information in the project `readme`.
+
+(Note however that not all contributions are credited in documentation or provided with contact info. We eagerly welcome valuable community contributions even anonymous ones.)
+
+For help with invocation, configuration, or diagnostics, consider using the [OSCAL Gitter chat channel](https://gitter.im/usnistgov-OSCAL/Lobby) (requires Github login), where community members can offer assistance often synchronously.
+
+Feature requests, bug reports, and ideas for further development can be submitted to the [repository Issues board](https://github.com/usnistgov/xslt3-functions/issues).
+
+## Citation
+
+Cite this repository as:
+
+Piez, Wendell, David Waltermire, et al. *XSLT3 Functions*. https://github.com/usnistgov/xslt3-functions.
+
+## Related Material
+
+### OSCAL
+
+This project supports the [OSCAL project](https://pages.nist.gov/OSCAL), a family of data models supporting activities in the domain of Systems Security, which entails not only securing systems and designing and deploying secure systems; but also the assessment, documentation and validation of security.
+
+- [OSCAL web site](https://pages.nist.gov/OSCAL)
+- [OSCAL repository](https://github.com/usnistgov/OSCAL)
+- [OSCAL tools site](https://pages.nist.gov/oscal-tools) and [repository](https://github.com/usnistgov/oscal-tools) (with [client-side XSLT demos](https://pages.nist.gov/oscal-tools/demos/csx))
+
+### XSLT
+
+XSLT, [Extensible Stylesheet Language Transformations](https://www.w3.org/XML/Group/qtspecs/specifications/xslt-30/html/), is a [fourth-generation programming language](https://en.wikipedia.org/wiki/Fourth-generation_programming_language) designed for the task of expediting tree-to-tree data transformations, where the trees concerned are abstracted representations of XML documents. That is, in addition to in-memory query, copy and manipulation, they are capable of being routinely and reliably produced by parsing XML, and persisted -- saved and exchanged across the system -- by serializing XML.
+
+Version 1.0 of XSLT was released in 1999. Originally intended for the purpose of making human-legible output formats such as PDF or HTML, XSLT also has more general uses, in data extraction and acquisition, normalization, rules enforcement (validation), code generation and transpiling, literate programming, middleware and more. While maintaining its heritage as a declarative, functional language well-suited for prototyping, rapid deployment and agile development, the most recent version, XSLT 3.1, adds features such as higher-order functions and pseudo-random number generation.
+
+The XSLT community can be found on the [XML.com Slack channel](https://www.xml.com/news/2020-04-slack-workspace-for-the-xml-community/) and in venues such as the [XSL-List](https://www.mulberrytech.com/xsl/xsl-list/index.html) listserv (email).
