@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet
     xmlns:javaUUID="java.util.UUID"
-    xmlns:mh="http://csrc.nist.gov/ns/message"
-    xmlns:r="http://csrc.nist.gov/ns/random"
-    xmlns:u="http://csrc.nist.gov/ns/uuid"
+    xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="#all"
@@ -30,11 +28,11 @@
 
     <!-- Use true() if message handler should return processing instruction
         that a caller can react to. Use false() if message handler should use xsl:message. -->
-    <xsl:param name="u:message_returns_pi" select="false()"/>
+    <xsl:param name="x3f:message_returns_pi" select="false()"/>
 
-    <xsl:template name="u:determine-uuid" as="item()+">
+    <xsl:template name="x3f:determine-uuid" as="item()+">
         <!-- Return value is xs:string, in addition to a processing instruction
-            if there is a warning situation and $u:message_returns_pi is true(). -->
+            if there is a warning situation and $x3f:message_returns_pi is true(). -->
         <xsl:param name="uuid-method" select="$uuid-method" as="xs:string"/>
         <xsl:param name="uuid-service" select="$uuid-service" as="xs:string"/>
         <xsl:param name="top-uuid" select="$top-uuid" as="xs:string?"/>
@@ -48,26 +46,26 @@
             </xsl:when>
             <xsl:when test="$uuid-method eq 'user-provided'">
                 <!-- If we reach this block, the provided value does not match the regex. -->
-                <xsl:call-template name="mh:message-handler">
+                <xsl:call-template name="x3f:message-handler">
                     <xsl:with-param name="message-type">Warning</xsl:with-param>
                     <xsl:with-param name="text" expand-text="yes">top-uuid value, '{$top-uuid}', does not meet UUID requirements. Using default UUID instead.</xsl:with-param>
-                    <xsl:with-param name="returns_pi" select="$u:message_returns_pi"/>
+                    <xsl:with-param name="returns_pi" select="$x3f:message_returns_pi"/>
                 </xsl:call-template>
                 <xsl:sequence select="$fixed-uuid"/>
             </xsl:when>
             <xsl:when test="$uuid-method eq 'random-xslt'" use-when="function-available('random-number-generator')">
                 <!-- seed splices a timestamp with a given @uuid -->
-                <xsl:sequence select="r:make-uuid( /*/@uuid || '-' || replace( string(current-dateTime()),'\D','') )"/>
+                <xsl:sequence select="x3f:make-uuid( /*/@uuid || '-' || replace( string(current-dateTime()),'\D','') )"/>
             </xsl:when>
             <xsl:when test="$uuid-method eq 'random-java'" use-when="function-available('javaUUID:randomUUID')">
                 <xsl:sequence select="javaUUID:randomUUID()"/>
             </xsl:when>
             <xsl:when test="$uuid-method = ('random-xslt','random-java')">
                 <!-- If we reach this block, the requested random method is not available. -->
-                <xsl:call-template name="mh:message-handler">
+                <xsl:call-template name="x3f:message-handler">
                     <xsl:with-param name="message-type">Warning</xsl:with-param>
                     <xsl:with-param name="text" expand-text="yes">uuid-method, '{$uuid-method}', is not available. Using default UUID instead.</xsl:with-param>
-                    <xsl:with-param name="returns_pi" select="$u:message_returns_pi"/>
+                    <xsl:with-param name="returns_pi" select="$x3f:message_returns_pi"/>
                 </xsl:call-template>
                 <xsl:sequence select="$fixed-uuid"/>
             </xsl:when>
@@ -75,10 +73,10 @@
                 <xsl:sequence select="unparsed-text($uuid-service)"/>
             </xsl:when>
             <xsl:when test="$uuid-method eq 'web-service'">
-                <xsl:call-template name="mh:message-handler">
+                <xsl:call-template name="x3f:message-handler">
                     <xsl:with-param name="message-type">Warning</xsl:with-param>
                     <xsl:with-param name="text" expand-text="yes">uuid-service, '{$uuid-service}', is not available. Using default UUID instead.</xsl:with-param>
-                    <xsl:with-param name="returns_pi" select="$u:message_returns_pi"/>
+                    <xsl:with-param name="returns_pi" select="$x3f:message_returns_pi"/>
                 </xsl:call-template>
                 <xsl:sequence select="$fixed-uuid"/>
             </xsl:when>
@@ -86,10 +84,10 @@
                 <xsl:sequence select="$fixed-uuid"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="mh:message-handler">
+                <xsl:call-template name="x3f:message-handler">
                     <xsl:with-param name="message-type">Warning</xsl:with-param>
                     <xsl:with-param name="text" expand-text="yes">uuid-method, '{$uuid-method}', is not recognized. Using default UUID instead.</xsl:with-param>
-                    <xsl:with-param name="returns_pi" select="$u:message_returns_pi"/>
+                    <xsl:with-param name="returns_pi" select="$x3f:message_returns_pi"/>
                 </xsl:call-template>
                 <xsl:sequence select="$fixed-uuid"/>
             </xsl:otherwise>

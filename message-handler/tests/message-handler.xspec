@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description
     xmlns:x="http://www.jenitennison.com/xslt/xspec"
-    xmlns:mh="http://csrc.nist.gov/ns/message"
+    xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     stylesheet="../message-handler.xsl"
     xslt-version="3.0">
 
-    <x:param name="mh:returns_pi" as="xs:boolean" select="true()"/>
+    <x:param name="x3f:returns_pi" as="xs:boolean" select="true()"/>
 
-    <x:scenario label="Tests for mh:message-handler template">
+    <x:scenario label="Tests for x3f:message-handler template">
         <x:scenario label="Call with text, type, and code">
-            <x:call template="mh:message-handler">
+            <x:call template="x3f:message-handler">
                 <x:param name="text" select="'message text'"/>
                 <x:param name="message-type" select="'Warning'"/>
                 <x:param name="error-code" select="'ERR1'"/>
@@ -20,7 +20,7 @@
             </x:expect>
         </x:scenario>
         <x:scenario label="Call with text and type only">
-            <x:call template="mh:message-handler">
+            <x:call template="x3f:message-handler">
                 <x:param name="text" select="'message text'"/>
                 <x:param name="message-type" select="'Warning'"/>
             </x:call>
@@ -29,7 +29,7 @@
             </x:expect>
         </x:scenario>
         <x:scenario label="Call with text and code only">
-            <x:call template="mh:message-handler">
+            <x:call template="x3f:message-handler">
                 <x:param name="text" select="'message text'"/>
                 <x:param name="error-code" select="'ERR1'"/>
             </x:call>
@@ -38,7 +38,7 @@
             </x:expect>
         </x:scenario>
         <x:scenario label="Call with text only">
-            <x:call template="mh:message-handler">
+            <x:call template="x3f:message-handler">
                 <x:param name="text" select="'message text'"/>
             </x:call>
             <x:expect label="PI indicating text">
@@ -47,7 +47,7 @@
         </x:scenario>
         <x:scenario label="Call with text and type only, with terminate=true: ">
             <x:scenario label="Check that message really terminates transform" catch="yes">
-                <x:call template="mh:message-handler">
+                <x:call template="x3f:message-handler">
                     <x:param name="text" select="'message text'"/>
                     <x:param name="message-type" select="'Error'"/>
                     <x:param name="terminate" select="true()"/>
@@ -56,7 +56,7 @@
                 <x:expect label="Error" test="$x:result instance of map(*) and $x:result('err') instance of map(*)"/>
             </x:scenario>
             <x:scenario label="Check PI">
-                <x:call template="mh:message-handler">
+                <x:call template="x3f:message-handler">
                     <x:param name="text" select="'message text'"/>
                     <x:param name="message-type" select="'Error'"/>
                     <x:param name="terminate" select="true()"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
     xmlns:ov="http://csrc.nist.gov/ns/oscal/xspec/variable"
-    xmlns:r="http://csrc.nist.gov/ns/random"
+    xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     stylesheet="../random-util.xsl"
@@ -18,7 +18,7 @@
 
     <x:scenario label="Tests for top-level template">
         <x:call template="xsl:initial-template"/>
-        <!-- Assertions here are minimal because r:make-uuid
+        <!-- Assertions here are minimal because x3f:make-uuid
             has function-level tests below. -->
         <x:expect label="Repeatable result for the seed, 'a'"
             test="$x:result/a[1]/string()" select="$x:result/a[2]/string()"/>
@@ -26,17 +26,17 @@
             test="not($x:result/a[1]/string() = $x:result/b/string())"/>
     </x:scenario>
 
-    <x:scenario label="Tests for r:make-uuid function">
-        <x:call function="r:make-uuid">
+    <x:scenario label="Tests for x3f:make-uuid function">
+        <x:call function="x3f:make-uuid">
             <x:param name="seed" select="$ov:seed"/>
         </x:call>
-        <x:expect label="Same as calling r:make-uuid-sequence with seq-length=1"
-            select="r:make-uuid-sequence($ov:seed, 1)"/>      
+        <x:expect label="Same as calling x3f:make-uuid-sequence with seq-length=1"
+            select="x3f:make-uuid-sequence($ov:seed, 1)"/>
     </x:scenario>
-    <x:scenario label="Tests for r:make-uuid-sequence function">
+    <x:scenario label="Tests for x3f:make-uuid-sequence function">
         <x:scenario label="seq-length=1">
             <x:variable name="ov:seq-length" as="xs:integer" select="1"/>
-            <x:call function="r:make-uuid-sequence">
+            <x:call function="x3f:make-uuid-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="$ov:seq-length"/>
             </x:call>
@@ -44,7 +44,7 @@
         </x:scenario>
         <x:scenario label="seq-length=10000">
             <x:variable name="ov:seq-length" as="xs:integer" select="10000"/>
-            <x:call function="r:make-uuid-sequence">
+            <x:call function="x3f:make-uuid-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="$ov:seq-length"/>
             </x:call>
@@ -56,7 +56,7 @@
         </x:scenario>
         <x:scenario label="seq-length=500,000" pending="To save time, run only when needed">
             <x:variable name="ov:seq-length" as="xs:integer" select="500000"/>
-            <x:call function="r:make-uuid-sequence">
+            <x:call function="x3f:make-uuid-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="$ov:seq-length"/>
             </x:call>
@@ -65,17 +65,17 @@
                 test="$x:result => distinct-values() => count() = $ov:seq-length"/>
         </x:scenario>
         <x:scenario label="Edge case: seq-length=0">
-            <x:call function="r:make-uuid-sequence">
+            <x:call function="x3f:make-uuid-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" as="xs:integer" select="0"/>
             </x:call>
             <x:expect label="Nothing" select="()"/>
         </x:scenario>
     </x:scenario>
-    <x:scenario label="Tests for r:make-random-string-sequence function">
+    <x:scenario label="Tests for x3f:make-random-string-sequence function">
         <x:scenario label="Template starts with _">
             <x:variable name="ov:template" select="'_xyz'"/>
-            <x:call function="r:make-random-string-sequence">
+            <x:call function="x3f:make-random-string-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="1"/>
                 <x:param name="template" select="$ov:template"/>
@@ -89,7 +89,7 @@
         </x:scenario>
         <x:scenario label="Template starts with =">
             <x:variable name="ov:template" select="'=xyz'"/>
-            <x:call function="r:make-random-string-sequence">
+            <x:call function="x3f:make-random-string-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="1"/>
                 <x:param name="template" select="$ov:template"/>
@@ -102,7 +102,7 @@
                 test="not(matches(substring($x:result,2),'[89ab]'))"/>
         </x:scenario>
         <x:scenario label="Template is empty string">
-            <x:call function="r:make-random-string-sequence">
+            <x:call function="x3f:make-random-string-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="1"/>
                 <x:param name="template" select="''"/>
@@ -112,7 +112,7 @@
         <x:scenario label="Long template of repeated '_' characters">
             <x:variable name="ov:template" select="string-join(for $j in (1 to 10000) return '_','')"/>
             <x:variable name="ov:expected-digits" as="xs:string" select="'^[0-9a-f]+$'"/>
-            <x:call function="r:make-random-string-sequence">
+            <x:call function="x3f:make-random-string-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="1"/>
                 <x:param name="template" select="$ov:template"/>
@@ -122,7 +122,7 @@
         <x:scenario label="Long template of repeated '=' characters">
             <x:variable name="ov:template" select="string-join(for $j in (1 to 10000) return '=','')"/>
             <x:variable name="ov:expected-digits" as="xs:string" select="'^[89ab]+$'"/>
-            <x:call function="r:make-random-string-sequence">
+            <x:call function="x3f:make-random-string-sequence">
                 <x:param name="seed" select="$ov:seed"/>
                 <x:param name="seq-length" select="1"/>
                 <x:param name="template" select="$ov:template"/>
@@ -199,9 +199,9 @@
         <x:expect label="Each string matches uuid regular expression"
             test="every $uuid in $x:result satisfies matches($uuid, $ov:uuid-v4-regex)"/>
         <x:expect label="Check repeatability for same seed"
-            test="deep-equal($x:result, r:make-uuid-sequence($ov:seed, $ov:seq-length))"/>
+            test="deep-equal($x:result, x3f:make-uuid-sequence($ov:seed, $ov:seq-length))"/>
         <x:expect label="Not typically equal to function output for a different seed"
-            test="not(deep-equal($x:result, r:make-uuid-sequence($ov:seed || '1', $ov:seq-length)))"/>
+            test="not(deep-equal($x:result, x3f:make-uuid-sequence($ov:seed || '1', $ov:seq-length)))"/>
     </x:scenario>
 
 </x:description>

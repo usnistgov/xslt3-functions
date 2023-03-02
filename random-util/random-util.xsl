@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="xs math r"
-    xmlns:r="http://csrc.nist.gov/ns/random" version="3.0">
+    xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="#all"
+    xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions" version="3.0">
 
     <!-- from the spec https://www.w3.org/TR/xpath-functions-31/#func-random-number-generator
 
-declare %public function r:random-sequence($length as xs:integer) as xs:double* {
-  r:random-sequence($length, fn:random-number-generator())
+declare %public function x3f:random-sequence($length as xs:integer) as xs:double* {
+  x3f:random-sequence($length, fn:random-number-generator())
 };
 
-declare %private function r:random-sequence($length as xs:integer,
+declare %private function x3f:random-sequence($length as xs:integer,
                                             $G as map(xs:string, item())) {
   if ($length eq 0)
   then ()
-  else ($G?number, r:random-sequence($length - 1, $G?next()))
+  else ($G?number, x3f:random-sequence($length - 1, $G?next()))
 };
 
-r:random-sequence(200);
+x3f:random-sequence(200);
 
 v4 UUID
    hex fields 8 4 4 4 12
@@ -27,7 +27,7 @@ v4 UUID
     -->
     <xsl:output indent="yes"/>
 
-    <!-- Set $germ to a string for reproducible outputs of r:make-uuid.
+    <!-- Set $germ to a string for reproducible outputs of x3f:make-uuid.
          Pass in a blind value - and don't save it - for irreproducible outputs. -->
 
     <xsl:param name="germ" select="current-dateTime() || document-uri(/)"/>
@@ -36,39 +36,39 @@ v4 UUID
     <xsl:template match="/" name="xsl:initial-template" expand-text="true">
         <!--<uuid><xsl:value-of select="uuid:randomUUID()" xmlns:uuid="java:java.util.UUID"/></uuid>-->
         <randomness>
-            <now>{ r:make-uuid(current-dateTime()) }</now>
-            <germ>{ r:make-uuid($germ) }</germ>
-            <a>{ r:make-uuid('a') }</a>
-            <a>{ r:make-uuid('a') }</a>
-            <b>{ r:make-uuid('b') }</b>
+            <now>{ x3f:make-uuid(current-dateTime()) }</now>
+            <germ>{ x3f:make-uuid($germ) }</germ>
+            <a>{ x3f:make-uuid('a') }</a>
+            <a>{ x3f:make-uuid('a') }</a>
+            <b>{ x3f:make-uuid('b') }</b>
             <ten>
-                <xsl:for-each select="r:make-uuid-sequence($germ, 10)">
+                <xsl:for-each select="x3f:make-uuid-sequence($germ, 10)">
                     <uuid>{ . }</uuid>
                 </xsl:for-each>
             </ten>
         </randomness>
     </xsl:template>
 
-    <!-- r:make-uuid produces one v4 UUID. Output is repeatable for a given seed.
+    <!-- x3f:make-uuid produces one v4 UUID. Output is repeatable for a given seed.
          If the random-number-generator() function is not available,
          this function returns an empty sequence. -->
-    <xsl:function name="r:make-uuid" as="xs:string?">
+    <xsl:function name="x3f:make-uuid" as="xs:string?">
         <xsl:param name="seed" as="item()"/>
-        <xsl:sequence select="r:make-uuid-sequence($seed, 1)"/>
+        <xsl:sequence select="x3f:make-uuid-sequence($seed, 1)"/>
     </xsl:function>
 
-    <!-- r:make-uuid-sequence produces a sequence of $seq-length v4 UUIDs.
+    <!-- x3f:make-uuid-sequence produces a sequence of $seq-length v4 UUIDs.
          Output is repeatable for a given seed. If the random-number-generator()
          function is not available, this function returns an empty sequence. -->
-    <xsl:function name="r:make-uuid-sequence" as="xs:string*">
+    <xsl:function name="x3f:make-uuid-sequence" as="xs:string*">
         <xsl:param name="seed" as="item()"/>
         <xsl:param name="seq-length" as="xs:integer"/>
         <xsl:variable name="uuid-v4-template" as="xs:string">________-____-4___-=___-____________</xsl:variable>
         <!--                                                 a847eaab-cec8-41bd-98e2-02d02900b554            -->
-        <xsl:sequence select="r:make-random-string-sequence($seed, $seq-length, $uuid-v4-template)"/>
+        <xsl:sequence select="x3f:make-random-string-sequence($seed, $seq-length, $uuid-v4-template)"/>
     </xsl:function>
 
-    <!-- r:make-random-string-sequence produces a sequence of $seq-length strings.
+    <!-- x3f:make-random-string-sequence produces a sequence of $seq-length strings.
          The $template parameter specifies the pattern of characters in each
          string, where:
            * '_' becomes a random hex value 0-9a-f
@@ -76,7 +76,7 @@ v4 UUID
            * Any other character is copied to the output string
          Output is repeatable for a given seed. If the random-number-generator()
          function is not available, this function returns an empty sequence. -->
-    <xsl:function name="r:make-random-string-sequence" as="xs:string*">
+    <xsl:function name="x3f:make-random-string-sequence" as="xs:string*">
         <xsl:param name="seed" as="item()"/>
         <xsl:param name="seq-length" as="xs:integer"/>
         <xsl:param name="template" as="xs:string"/>
