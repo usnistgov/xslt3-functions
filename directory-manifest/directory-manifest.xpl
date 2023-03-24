@@ -22,20 +22,23 @@
     
     <p:input port="parameters" kind="parameter"/>
     
-    <p:serialization port="html-report" indent="true"/>
-    <p:output port="html-report">
+    <p:serialization port="md" method="text"/>
+    <p:output port="md" primary="true">
+        <p:pipe port="result" step="markdown"/>
+    </p:output>
+    
+    <p:serialization port="html" method="html"/>
+    <p:output port="html">
         <p:pipe port="result" step="survey"/>
     </p:output>
     
-    <p:serialization port="md-report" method="text"/>
-    <p:output port="md-report">
-        <p:pipe port="result" step="markdown"/>
-    </p:output>
+    <!-- :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::   -->
     
     <p:directory-list>
         <p:with-option name="path" select="$path"/>
     </p:directory-list>
     
+    <!--<p:identity name="survey"/>-->
     <p:xslt name="survey">
         <p:input port="stylesheet">
             <p:document href="directory-listing.xsl"/>
@@ -43,6 +46,7 @@
         <p:with-param name="path" select="$path"/>
     </p:xslt>
     
+    <!--<p:identity name="markdown"/>-->
     <p:xslt name="markdown">
         <p:input port="stylesheet">
             <p:document href="html-to-markdown.xsl"/>

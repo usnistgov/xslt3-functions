@@ -46,6 +46,11 @@
     <xsl:apply-templates/>
   </xsl:template>
   
+  <xsl:template match="hr">
+    <xsl:text>&#10;&#10;-----&#10;</xsl:text>
+  </xsl:template>
+  
+  
   <xsl:template match="div[contains-token(@class,'element-description')]/span[contains(@class,'tag')]">
     <!-- double escaped! -->
     <xsl:text>&amp;lt;</xsl:text>

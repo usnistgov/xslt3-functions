@@ -20,6 +20,8 @@
   <xsl:template match="/">
     <body path="{$path}">
       <xsl:apply-templates select="//c:file"/>
+      <hr class="hr"/>
+      <p>(end listing)</p>
     </body>
   </xsl:template>
 
@@ -27,23 +29,23 @@
 
   <xsl:template match="c:file[ends-with(@name, 'md')]"/>
 
-  <xsl:template
-    match="c:file[ends-with(@name, 'xsl') or ends-with(@name, 'xslt') or ends-with(@name, 'xpl')]">
-    <xsl:variable name="filepath" select="string(@name)"/>
-    <xsl:if test="matches($filepath, '(xml|xpl|sch|xsl|xslt)$')">
-      <div>
-        <h4>
-          <xsl:value-of select="@name"/>
-        </h4>
-        <xsl:apply-templates select="document($filepath => resolve-uri($path))/*" mode="report"/>
-      </div>
-    </xsl:if>
+  <xsl:template match="c:file[matches(@name, '\.(xml|xpl|sch|xsl|xslt)$')]">
+    <xsl:variable name="filepath" select="parent::c:directory/@xml:base || string(@name)"/>
+    <hr class="hr"/>
+    <div>
+      <h4>
+        <xsl:value-of select="@name"/>
+      </h4>
+      <xsl:apply-templates select="document($filepath => resolve-uri($path))/*" mode="report"/>
+    </div>
   </xsl:template>
 
   <xsl:template match="xsl:stylesheet | xsl:transform" mode="report">
     <xsl:variable name="templatecount" select="count(xsl:template)"/>
+    <xsl:variable name="functioncount" select="count(xsl:function)"/>
     <p>XSLT stylesheet version { @version } ({ $templatecount } { if ($templatecount eq 1) then
-      'template' else 'templates' })</p>
+      'template' else 'templates' }{ if ($functioncount eq 1) then
+      ', 1 function' else $functioncount[. gt 0]!(', ' || . || ' functions') })</p>
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
@@ -78,6 +80,10 @@
 
   <xsl:template match="text()" mode="report"/>
 
-
-
+  <xsl:template match="/*" mode="report" expand-text="true" priority="-0.1">
+    <p>TODO: REPORT { name() }</p>
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
+  
 </xsl:stylesheet>
