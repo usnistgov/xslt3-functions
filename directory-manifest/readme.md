@@ -6,10 +6,10 @@ Run the XProc providing the path to the subdirectory you want and it writes out 
 
 Output ports are defined for HTML and Markdown formats - save either one or both.
 
-Coming soon: how to invoke this
+Invocation scripts:
 
-- Using XML Calabash under Java
-- Using Maven
+`make-manifest-here.sh` Bash shell script produces manifest.md in the current (working) directory, using Maven to call XML Calabash - requires Maven
 
-Script copied from Nikita Wootten's oscal-profile-resolve.sh 
-https://raw.githubusercontent.com/nikitawootten-nist/OSCAL/42222caa44b892a398392ec3813213fc411a2465/src/utils/util/resolver-pipeline/oscal-profile-resolve.sh
+`make-x3f-manifest.bat` Windows Powershell script does likewise
+
+`produce-manifest.sh` calls XML Calabash directly (work in progress) - does not require Maven, only XML Calabash on Java
