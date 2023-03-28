@@ -22,19 +22,25 @@
     
     <p:input port="parameters" kind="parameter"/>
     
+    <p:serialization port="dirlist" method="xml" indent="true"/>
+    <p:output port="dirlist" primary="false">
+        <p:pipe port="result" step="dirlist"/>
+    </p:output>
+    
+    <p:serialization port="html" method="html" indent="true"/>
+    <p:output port="html">
+        <p:pipe port="result" step="survey"/>
+    </p:output>
+
     <p:serialization port="md" method="text"/>
     <p:output port="md" primary="true">
         <p:pipe port="result" step="markdown"/>
     </p:output>
     
-    <p:serialization port="html" method="html"/>
-    <p:output port="html">
-        <p:pipe port="result" step="survey"/>
-    </p:output>
     
     <!-- :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::   -->
     
-    <p:directory-list>
+    <p:directory-list name="dirlist">
         <p:with-option name="path" select="$path"/>
     </p:directory-list>
     

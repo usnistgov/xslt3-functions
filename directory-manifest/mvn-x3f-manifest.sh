@@ -36,6 +36,6 @@ mvn -q \
     -f $POM_FILE \
     exec:java \
     -Dexec.mainClass="com.xmlcalabash.drivers.Main" \
-    -Dexec.args="-omd=${HEREPATH}/manifest.md -ohtml=/dev/null  $PIPELINE path=$HEREPATH"
+    -Dexec.args="-omd=${HEREPATH}/manifest.md -odirlist=/dev/null -ohtml=/dev/null  $PIPELINE path=$HEREPATH"
 
 echo See $HEREPATH/manifest.md
