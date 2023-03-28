@@ -30,7 +30,7 @@
         <p class="timestamp">{ current-dateTime() => format-dateTime('[MNn] [D0] [Y] [h0]:[m01] [P]') } - { current-dateTime() } -</p>
         <p>Listing files suffixed <code>xml</code>, <code>xpl</code>, <code>sch</code>, <code>xsl</code>, <code>xslt</code>, <code>xsd</code> or <code>xspec</code>.</p>
         <xsl:apply-templates select="//c:file">
-          <xsl:sort select="replace(@name,'.*\.','')"/>
+          <xsl:sort select="@name"/>
         </xsl:apply-templates>
         <hr class="hr"/>
         <p>(end listing)</p>
@@ -45,12 +45,11 @@
   <xsl:template match="c:file[matches(@name, '\.(xml|xpl|sch|xsl|xslt|xsd|xspec)$')]">
     <xsl:variable name="filepath" select="parent::c:directory/@xml:base || string(@name)"/>
     <div>
-      <h4>{ @name }</h4>
-      <h5>path: { $filepath }:{ doc-available($filepath) } # { document($filepath,.)/*/name() }</h5>
+      <h3>{ @name }</h3>
+      <!--<h5>path: { $filepath }:{ doc-available($filepath) } # { document($filepath,.)/*/name() }</h5>-->
       <xsl:apply-templates select="document($filepath,.)/*" mode="report"/>
     </div>
   </xsl:template>
-
 
   <xsl:template match="xsl:stylesheet | xsl:transform" mode="report" priority="1">
     <xsl:variable name="templatecount" select="count(xsl:template)"/>
@@ -62,7 +61,7 @@
   </xsl:template>
 
   <xsl:template match="xsl:stylesheet/xsl:param" mode="report">
-    <p>Runtime parameter <code>{ @name }</code> { @as/(' as ' || .) }</p>
+    <p>Stylesheet Welparameter <code>{ @name }</code> { @as/(' as ' || .) }</p>
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
