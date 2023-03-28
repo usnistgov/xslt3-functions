@@ -2,29 +2,27 @@
 
 # Directory Manifest
 
+March 28 2023 6:09 p.m. - 2023-03-28T18:09:33.9101856-04:00 -
+
 Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
-#### directory-listing.xsl path: file:///mnt/c/Users/wap1/Documents/usnistgov/xslt3-functions/directory-manifest/directory-listing.xsl:true # xsl:stylesheet
+### directory-listing.xsl
 
-XSLT stylesheet version 3.0 (12 templates)
+XSLT stylesheet version 3.0 (13 templates)
 
-Runtime parameter `path` 
+Stylesheet parameter `path` 
 
-#### directory-manifest.xpl path: file:///mnt/c/Users/wap1/Documents/usnistgov/xslt3-functions/directory-manifest/directory-manifest.xpl:true # c:directory
+### directory-manifest.xpl
 
-TODO: REPORT c:directory
+Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (11 elements)
 
-#### dirlist.xml path: file:///mnt/c/Users/wap1/Documents/usnistgov/xslt3-functions/directory-manifest/dirlist.xml:true # c:directory
-
-TODO: REPORT c:directory
-
-#### html-to-markdown.xsl path: file:///mnt/c/Users/wap1/Documents/usnistgov/xslt3-functions/directory-manifest/html-to-markdown.xsl:true # xsl:stylesheet
+### html-to-markdown.xsl
 
 XSLT stylesheet version 3.0 (19 templates)
 
-#### pom.xml path: file:///mnt/c/Users/wap1/Documents/usnistgov/xslt3-functions/directory-manifest/pom.xml:true # project
+### pom.xml
 
-TODO: REPORT project
+Document 'project', in no namespace (35 elements)
 
 -----
 
