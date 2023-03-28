@@ -61,7 +61,7 @@
   </xsl:template>
 
   <xsl:template match="xsl:stylesheet/xsl:param" mode="report">
-    <p>Stylesheet Welparameter <code>{ @name }</code> { @as/(' as ' || .) }</p>
+    <p>Stylesheet parameter <code>{ @name }</code> { @as/(' as ' || .) }</p>
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
@@ -78,8 +78,7 @@
   <xsl:template match="p:declare-step | p:pipeline" mode="report" priority="1">
     <xsl:variable name="steps" select="child::* except (p:input | p:output | p:sink | p:serialization)"/>
     <xsl:variable name="stepcount" select="count($steps)"/>
-    <p>XProc pipeline version { @version } ({ $stepcount } { if ($stepcount eq 1) then 'step' else
-      'steps' })</p>
+    <p>XProc pipeline version { @version } ({ $stepcount } { if ($stepcount eq 1) then 'step' else 'steps' })</p>
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
@@ -90,18 +89,16 @@
   <xsl:template match="xs:schema" mode="report" priority="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xsl:variable name="element-count" select="count(//xs:element)"/>
     <xsl:variable name="top-level-count" select="count(/*/xs:element)"/>
-    
-    <p>XML Schema Definition instance ({ $element-count } { if ($element-count eq 1) then 'element' else
-      'elements' }, { $top-level-count} at top level)</p>
+    <p>XML Schema Definition instance ({ $element-count } { if ($element-count eq 1) then 'element' else 'elements' }, { $top-level-count} at top level)</p>
     <!--<xsl:apply-templates mode="#current"/>-->
   </xsl:template>
 
   <xsl:template match="text()" mode="report"/>
 
   <xsl:template match="/*" mode="report" expand-text="true" priority="-0.1">
-    <p>TODO: REPORT { name() }</p>
+    <p>Document '{ name() }'{ if (namespace-uri(.)) then (' in namespace ' || namespace-uri(.)) else ', in no namespace'} ({ count(//*) } { if (empty(/*/*)) then ' element' else ' elements' })</p>
     <xsl:apply-templates mode="#current"/>
+    <!--<p>{ serialize(.) }</p>-->
   </xsl:template>
   
-
 </xsl:stylesheet>
