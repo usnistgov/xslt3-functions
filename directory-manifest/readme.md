@@ -28,28 +28,55 @@ To use -
 
 > $ ../path/to/xproc-x3f-manifest.sh
 
+#### Details
+
+A typical XML Calabash call might look like:
+
+> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=manifest.html -odirlist=/dev/null /path/to/directory-manifest.xpl path=$HEREPATH
+
+`-o` flags indicating output ports for XML Calabash:
+
+- `md` - Markdown results
+- `html` HTML results
+- `dirlist` directory listing (for debugging)
+
+Additionally
+
+- `$CLASSPATH` includes the XML Calabash jar and a jar for logging as necessary
+- `$HEREPATH` is a path (as file: URI) to directory to be polled
+
 ### Under Maven
 
 This is simpler if you have Maven and don't wish to install or wire up for XML Calabash. Maven requires a JDK to run but encapsulates all the dependency management.
 
-`mvn-x3f-manifest.sh` - bash shell script
+`mvn-x3f-manifest.sh` - bash shell script, produces a Markdown file `manifest.md` in the current directory
 
-`mvn-x3f-manifest.bat` - Windows (Powershell) batch file
+`mvn-x3f-manifest.bat` - Windows (Powershell) batch file, ditto
 
-## Maintenance and extensibility
+Inspect the scripts to see how the calls to Maven are constructed, including bindings for the XProc output ports noted.
+
+## Architecture
 
 The XProc pipeline `directory-manifest.xpl` executes three steps:
 
-- Polls the provided directory path for file contents (file name list)
-- Processes this poll through a filter, dispatching to each file of several known types
+- Polls the provided directory path for file contents to produce a file name list
+- Processes this poll through an XSLT filter, dispatching to each file of several known types
   - Each file is parsed, processed and filtered
-  - An HTML file listing is emitted
-- The HTML report is passed through a Markdown filter to reduce it to Markdown (text-based) syntax
+  - An HTML file listing is emitted, with poll results
+- This HTML report is passed through another XSLT filter to reduce it to Markdown (text-based) syntax
 
 For any given subdirectory, a File Contents / Resource Manifest may be created by running this process and capturing the HTML or Markdown (final) results.
+
+### Maintenance and extensibility
 
 New capabilities in polling and reporting XML-based file types may be added by providing templates to the XSLT that implements the middle of these three processes: `directory-listing.xsl`. 
 
 For more info, see the [manifest.md](manifest.md).
 
 Interestingly, note that  [directory-manifest.xpl](directory-manifest.xpl) is unable to open and inspect itself.
+
+### Further development
+
+The application of course leverages XML's transparency in an XML processing context, but it also aims to be lightweight, producing Markdown (suitable for further editing) rather than a 'smarter' more highly structured output -- and not working very hard at inferencing either.
+
+With some extension, the same approach could be used to produce metadata feeds or basically any directory-level metadata containing this info. Elaborations on the input side could take advantage of native documentation and literate-programming apparatus such as embedded XSD or XSLT documentation.
