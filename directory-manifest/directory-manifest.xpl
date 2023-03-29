@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:c="http://www.w3.org/ns/xproc-step" version="1.0">
+    xmlns:c="http://www.w3.org/ns/xproc-step" version="1.0"
+    xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
+    type="x3f:directory-manifest" name="directory-manifest">
     
     <!-- To run: provide a URI to a directory
     The pipeline:
