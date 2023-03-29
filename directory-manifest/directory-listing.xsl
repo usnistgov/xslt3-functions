@@ -82,8 +82,8 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
-  <xsl:template match="p:document" mode="report">
-    <p>Runtime dependency: <code>{ @href }</code></p>
+  <xsl:template match="p:document | p:import" mode="report">
+    <p>Runtime dependency ({ name() }): <code>{ @href }</code></p>
   </xsl:template>
 
   <xsl:template match="xs:schema" mode="report" priority="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">

@@ -2,9 +2,16 @@
 
 Writes descriptions of your folder's XML-based contents, dynamically.
 
-Run the XProc providing the path to the subdirectory you want and it writes out a report.
+Also provides examples of
+  - XProc 1.0 polling the file system
+  - XProc 1.0 delivering markup and Markdown outputs
+  - XProc 1.0 wrapping a call to XProc 1.0 to encapsulate logic.
 
-Output ports are defined for HTML and Markdown formats - save either one or both.
+Run XProc providing the path to the subdirectory you want and it writes out a report.
+
+For the main pipeline, output ports are defined for echoed input, HTML and Markdown formats - save any or all.
+
+For convenience a small 'wrapper' pipeline is also available, hard-coded to produce Markdown (only) and write it to the file system, with a  simpler interface.
 
 Currently the utility attempts to read `xml`, `xsd`, `xsl`, `xslt`, `xpr`, `xsd` and `sch`, providing a lightweight but useful synopsis of file contents.
 
@@ -20,25 +27,37 @@ As a Java application it can be downloaded and run, or run under Maven without p
 
 `xproc-x3f-manifest.sh` - bash script invoking XML Calabash in Java: runs an XProc 1.0 pipeline to produce a directory manifest describing the current directory.
 
+To configure, install [XML Calabash](http://xmlcalabash.com) and adjust the script as needed to resolve resources on your system.
+
+Optionally, put the script's location on the system path or otherwise configure it to be available from other directories.
+
 To use -
 
 * Change directories to the folder you want polled and described
-* Run the script (with an explicit path to locate it or a setting on your system PATH)
+* Run the script (with an explicit path to locate it or a setting on your system path)
 * Inspect the resulting `manifest.md` file
 
 > $ ../path/to/xproc-x3f-manifest.sh
 
 #### Details
 
-A typical XML Calabash call might look like:
+A typical XML Calabash call might look like either:
 
-> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=manifest.html -odirlist=/dev/null /path/to/directory-manifest.xpl path=$HEREPATH
+The wrapper (simple interface) pipeline
 
-`-o` flags indicating output ports for XML Calabash:
+> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main /path/to/make-markdown-manifest.xpl dir=$HEREPATH
+
+The core pipieline with options set to the same effect:
+
+> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=manifest.html -odirlist=/dev/null /path/to/directory-manifest.xpl dir=$HEREPATH
+
+In the core pipeline, `-o` flags indicating output ports for XML Calabash, defined in the pipeline:
 
 - `md` - Markdown results
 - `html` HTML results
 - `dirlist` directory listing (for debugging)
+
+Note these ports are *not exposed* by the wrapper pipeline, which hence needs no `-o` arguments.
 
 Additionally
 
@@ -71,7 +90,7 @@ For any given subdirectory, a File Contents / Resource Manifest may be created b
 
 New capabilities in polling and reporting XML-based file types may be added by providing templates to the XSLT that implements the middle of these three processes: `directory-listing.xsl`. 
 
-For more info, see the [manifest.md](manifest.md).
+For an example, see the [manifest.md](manifest.md).
 
 Interestingly, note that  [directory-manifest.xpl](directory-manifest.xpl) is unable to open and inspect itself.
 
