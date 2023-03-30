@@ -6,6 +6,7 @@ Also provides examples of
   - XProc 1.0 polling the file system
   - XProc 1.0 delivering markup and Markdown outputs
   - XProc 1.0 wrapping a call to XProc 1.0 to encapsulate logic.
+  - Simple XProc 3.0 delivering the same results
 
 Run XProc providing the path to the subdirectory you want and it writes out a report.
 
@@ -13,13 +14,17 @@ For the main pipeline, output ports are defined for echoed input, HTML and Markd
 
 For convenience a small 'wrapper' pipeline is also available, hard-coded to produce Markdown (only) and write it to the file system, with a  simpler interface.
 
+Additionally, and looking forward to eventual migration, an *XProc 3.0* version is provided. It is comparatively lightweight, combining the virtues of both the 1.0 variants - while at the same time, the XProc 3.0 variant will support the 1.0 architecture (which exposes more ports for reuse and debugging) with some easy extension.
+
 Currently the utility attempts to read `xml`, `xsd`, `xsl`, `xslt`, `xpr`, `xsd` and `sch`, providing a lightweight but useful synopsis of file contents.
 
 ## Dependencies
 
-The application depends on [XML Calabash](http://xmlcalabash.com), by Norman Walsh.
+The XProc 1.0 application has been tested on [XML Calabash](http://xmlcalabash.com), by Norman Walsh. As this software is well tested and distributed by Maven, we consider it the stable version - while we also do not expect the XProc 3.0 to change.
 
-As a Java application it can be downloaded and run, or run under Maven without prior download and configuration (see below).
+The XProc 3.0 application has been tested using [MorganaXProc-IIIse](http://xml-project.com) (version 1.1.3 atw) by Achim Berndzen.
+
+As open-source Java applications either of these can be downloaded and run; or XML Calabash may be run under Maven without prior download and configuration (see below).
 
 ## Invocation
 
@@ -74,6 +79,12 @@ This is simpler if you have Maven and don't wish to install or wire up for XML C
 
 Inspect the scripts to see how the calls to Maven are constructed, including bindings for the XProc output ports noted.
 
+## Morgana XProc
+
+Install the application, adjust paths or scripts, and run the `directory-manifest3.xpl` pipeline.
+
+We had to add a copy of SaxonHE to the classpath so the application could find it. This is a known bug and you may not encounter it.
+
 ## Architecture
 
 The XProc pipeline `directory-manifest.xpl` executes three steps:
@@ -92,7 +103,7 @@ New capabilities in polling and reporting XML-based file types may be added by p
 
 For an example, see the [manifest.md](manifest.md).
 
-Interestingly, note that  [directory-manifest.xpl](directory-manifest.xpl) is unable to open and inspect itself.
+Interestingly, note that  [directory-manifest.xpl](directory-manifest.xpl) is unable to open and inspect itself run under XProc 1.0 / XML Calabash - while the same logic in [directory-manifest3.xpl](directory-manifest3.xpl) functions as expected in XProc 3.0 / Morgana.
 
 ### Further development
 

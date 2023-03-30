@@ -51,7 +51,6 @@
         <p:input port="stylesheet">
             <p:document href="directory-listing.xsl"/>
         </p:input>
-        <p:with-param name="path" select="$path"/>
     </p:xslt>
     
     <!--<p:identity name="markdown"/>-->

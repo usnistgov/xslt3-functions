@@ -1,8 +1,8 @@
 
 
-# Directory Manifest
+# Directory Manifest: `directory-manifest`
 
-March 29 2023 3:41 p.m. - 2023-03-29T15:41:13.6881066-04:00 -
+March 30 2023 7:57 p.m. - 2023-03-30T19:57:06.364507-04:00 -
 
 Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
@@ -10,11 +10,17 @@ Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
 XSLT stylesheet version 3.0 (13 templates)
 
-Stylesheet parameter `path` 
-
 ### directory-manifest.xpl
 
-Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (12 elements)
+XProc pipeline version 1.0 (4 steps)
+
+Runtime dependency (p:document): `directory-listing.xsl`
+
+Runtime dependency (p:document): `html-to-markdown.xsl`
+
+### directory-manifest3.xpl
+
+XProc pipeline version 3.0 (5 steps)
 
 ### html-to-markdown.xsl
 

@@ -16,17 +16,17 @@
      
   -->
 
-  <xsl:param name="path" select="'.'"/>
-
   <xsl:strip-space elements="*"/>
+  
+  <xsl:variable name="path" select="/c:directory/@xml:base"/>
   
   <xsl:template match="/">
     <html>
       <head>
         <title>Directory Manifest: { $path }</title>
       </head>
-      <body path="{$path}">
-        <h1>Directory Manifest</h1>
+      <body data-path="{$path}">
+        <h1>Directory Manifest: <code>{ tokenize($path,'/')[last() - 1] }</code></h1>
         <p class="timestamp">{ current-dateTime() => format-dateTime('[MNn] [D0] [Y] [h0]:[m01] [P]') } - { current-dateTime() } -</p>
         <p>Listing files suffixed <code>xml</code>, <code>xpl</code>, <code>sch</code>, <code>xsl</code>, <code>xslt</code>, <code>xsd</code> or <code>xspec</code>.</p>
         <xsl:apply-templates select="//c:file">
