@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:c="http://www.w3.org/ns/xproc-step" version="1.0"
+    xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
+    type="x3f:markdown-manifest" name="markdown-manifest">
+    
+    
+    <p:input port="parameters" kind="parameter"/>
+    
+    <p:option name="path" select="'.'"/>
+    
+    <!-- :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::   -->
+    
+    <p:import href="directory-manifest.xpl"/>
+
+    <x3f:directory-manifest name="manifest">
+        <p:with-option name="path" select="$path"/>
+    </x3f:directory-manifest>
+    
+    <p:store method="text">
+        <p:with-option name="href" select="$path || '/manifest.md'"/>
+    </p:store>
+    
+</p:declare-step>
