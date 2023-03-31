@@ -4,17 +4,10 @@
   xmlns="http://www.w3.org/1999/xhtml" version="3.0" expand-text="true"
   exclude-result-prefixes="#all">
 
-
-  <!-- Reads directory on file system and writes out a manifest of its contents.
-  For XSLTs and XProcs, lists file dependencies (echoes calls on xsl:import, xsl:include, document() function etc.)
-  Produces simple HTML suitable for auto-conversion into markdown
-  e.g., pipeline this with a markdown serializer to produce a file auto-manifest.md
-  -->
-
-  <!-- Next: connect up into pipeline for production of md
-     Run and refine (checking against Gitlab)
-     
-  -->
+  <!-- Purpose: Produce an HTML report from polling a set of XML files provided as a directory list -->
+  <!-- Input: A c:directory document such as is delivered by XProc `p:directory-list` step -->
+  <!-- Limitations: Built out only for common cases seen so far, YMMV -->
+  <!-- Note: Logic is extensible to handle analysis/synopsis of any XML document type -->
 
   <xsl:strip-space elements="*"/>
   
@@ -51,6 +44,13 @@
     </div>
   </xsl:template>
 
+  <!-- Any comments starting with a keyword indicated are picked up -->
+  <xsl:template mode="report" match="comment()[matches(., '^\s*(Purpose|Dependenc(y|ies)|Input|Output|Note|Description|Steps?|Limitations?):')]">
+    <p>
+      <xsl:value-of select="normalize-space(.)"/>
+    </p>
+  </xsl:template>
+
   <xsl:template match="xsl:stylesheet | xsl:transform" mode="report" priority="1">
     <xsl:variable name="templatecount" select="count(xsl:template)"/>
     <xsl:variable name="functioncount" select="count(xsl:function)"/>
@@ -65,27 +65,45 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
-  <xsl:template mode="report" match="comment()[matches(., '^\s*(Purpose|Dependencies|Input|Output|Note|Limitations?):')]">
-    <p>
-      <xsl:value-of select="normalize-space(.)"/>
-    </p>
-  </xsl:template>
-
   <xsl:template match="xsl:include | xsl:import" mode="report">
     <p>Compile-time dependency ({ name() }) <code>{ @href }</code></p>
   </xsl:template>
 
   <xsl:template match="p:declare-step | p:pipeline" mode="report" priority="1">
-    <xsl:variable name="steps" select="child::* except (p:input | p:output | p:sink | p:serialization)"/>
+    <xsl:variable name="steps" select="child::* except (p:input | p:output | p:sink | p:serialization | p:option)"/>
     <xsl:variable name="stepcount" select="count($steps)"/>
     <p>XProc pipeline version { @version } ({ $stepcount } { if ($stepcount eq 1) then 'step' else 'steps' })</p>
+    <xsl:for-each-group select="p:output" group-by="true()">
+      <p>
+        <xsl:text>Output { if (count(current-group()) eq 1) then 'port' else 'ports' } - </xsl:text>
+        <xsl:for-each select="current-group()">
+          <xsl:if test="position() gt 1">, </xsl:if>
+          <code>{ @port }</code>
+        </xsl:for-each>
+      </p>
+    </xsl:for-each-group>
+    <xsl:for-each-group select="//p:store" group-by="true()">
+      <p>
+        <xsl:text>Stores - </xsl:text>
+        <xsl:for-each select="current-group()">
+          <xsl:if test="position() gt 1">, </xsl:if>
+          <code>{ @href | p:with-option[@name='href']/@select }</code>
+        </xsl:for-each>
+      </p>
+    </xsl:for-each-group>
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
-  <xsl:template match="p:document | p:import" mode="report">
-    <p>Runtime dependency ({ name() }): <code>{ @href }</code></p>
+  <xsl:template match="p:document | p:import | p:with-input[exists(@href)]" mode="report">
+    <p>Reads from ({ name() }) - <code>{ @href }</code></p>
   </xsl:template>
 
+  <xsl:template match="p:option" mode="report">
+    <p>Runtime option <code>{ @name }</code> { @as/(' as ' || .) }</p>
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
+  
   <xsl:template match="xs:schema" mode="report" priority="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xsl:variable name="element-count" select="count(//xs:element)"/>
     <xsl:variable name="top-level-count" select="count(/*/xs:element)"/>

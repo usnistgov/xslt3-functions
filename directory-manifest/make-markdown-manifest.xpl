@@ -5,6 +5,10 @@
     xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
     type="x3f:markdown-manifest" name="markdown-manifest">
     
+    <!-- Purpose: Produce a directory manifest in Markdown, called `manifest.md` -->
+    <!-- Description: This is a wrapper XProc around 'directory-manifest.xpl' hiding its ports and writing to (named) file output -->
+    <!-- Option: provide 'path' as a URI e.g. file:///my/directory/ -->
+    <!-- Output: a Markdown file 'manifest.md' in the current directory -->
     
     <p:input port="parameters" kind="parameter"/>
     

@@ -5,7 +5,11 @@
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
   version="3.0">
   
-<!-- Translates a simple HTML (for OSCAL docs) into Github Markdown -->
+  <!-- Purpose: Cast HTML into Markdown notation -->
+  <!-- Input: More or less any HTML in the XHTML namespace -->
+  <!-- Output: A block of Markdown, to be serialized using the 'text' method -->
+  <!-- Note: Aims for Github Markdown more or less, but subject to adjustment, adaptation and extension -->
+  
   
   <xsl:template match="/">
     <!-- Ensures XML output for XProc. Strip this element (or simply serialize using @method='text') to get your Markdown! -->

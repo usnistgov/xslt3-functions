@@ -5,6 +5,8 @@
     xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
     type="x3f:directory-manifest" name="directory-manifest">
     
+    <!-- Purpose: Same as make-markdown-manifest.xpl, except using XProc 3.0 -->
+    
     <!--
     Experimental XProc 3 version of directory-manifest.xpl
     Tested with Morgana XProc see https://www.xml-project.com/morganaxproc-iiise.html

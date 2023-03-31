@@ -5,20 +5,9 @@
     xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
     type="x3f:directory-manifest" name="directory-manifest">
     
-    <!-- To run: provide a URI to a directory
-    The pipeline:
-    - retrieves a directory listing
-    - feeds it to an XSLT producing HTML
-    - feeds this result to a Markdown generator
-    
-    The result is Markdown suitable for placing into a README or other folder-level documentation
-    listing XSLT and XProc instances
-    
-    following a convention for listing and annotating these to produce an HTML report
-    (codified in XSLT directory-listing.xsl)
-    
-    -->
-    
+    <!-- Purpose: Provide a pipeline with ports exposed for debugging generating HTML and Markdown from a set of XML files being polled -->
+    <!-- Steps: retrieves a directory listing; feeds it to an XSLT producing HTML; feeds this result to a Markdown generator -->
+    <!-- Output: Markdown suitable for placing into a README or other folder-level documentation -->
     
     <p:option name="path" select="'.'"/>
     
@@ -38,7 +27,6 @@
     <p:output port="md" primary="true">
         <p:pipe port="result" step="markdown"/>
     </p:output>
-    
     
     <!-- :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::   -->
     
