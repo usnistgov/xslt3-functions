@@ -2,13 +2,7 @@
 
 Writes descriptions of your folder's XML-based contents, dynamically.
 
-Also provides examples of
-  - XProc 1.0 polling the file system
-  - XProc 1.0 delivering markup and Markdown outputs
-  - XProc 1.0 wrapping a call to XProc 1.0 to encapsulate logic.
-  - Simple XProc 3.0 delivering the same results
-
-Run XProc providing the path to the subdirectory you want and it writes out a report.
+Run XProc (1.0 or 3.0) providing the path to the subdirectory you want and it writes out a report.
 
 For the main pipeline, output ports are defined for echoed input, HTML and Markdown formats - save any or all.
 
@@ -24,7 +18,7 @@ The XProc 1.0 application has been tested on [XML Calabash](http://xmlcalabash.c
 
 The XProc 3.0 application has been tested using [MorganaXProc-IIIse](http://xml-project.com) (version 1.1.3 atw) by Achim Berndzen.
 
-As open-source Java applications either of these can be downloaded and run; or XML Calabash may be run under Maven without prior download and configuration (see below).
+As open-source Java applications, either of these can be downloaded and run; or XML Calabash may be run under Maven without prior download and configuration (see below).
 
 ## Invocation
 
@@ -77,11 +71,13 @@ This is simpler if you have Maven and don't wish to install or wire up for XML C
 
 `mvn-x3f-manifest.bat` - Windows (Powershell) batch file, ditto
 
+`mvn-manifest.sh` - bash shell script, same functionality but simpler, using a wrapper XProc.
+
 Inspect the scripts to see how the calls to Maven are constructed, including bindings for the XProc output ports noted.
 
 ## Morgana XProc
 
-Install the application, adjust paths or scripts, and run the `directory-manifest3.xpl` pipeline.
+Install the application, adjust paths or scripts, and run the `make-markdown-manifest3.xpl` pipeline.
 
 We had to add a copy of SaxonHE to the classpath so the application could find it. This is a known bug and you may not encounter it.
 
@@ -97,16 +93,16 @@ The XProc pipeline `directory-manifest.xpl` executes three steps:
 
 For any given subdirectory, a File Contents / Resource Manifest may be created by running this process and capturing the HTML or Markdown (final) results.
 
+The various scripts and pipelines build off this basic capability, invoking and adapting it in various ways. 
+
 ### Maintenance and extensibility
 
 New capabilities in polling and reporting XML-based file types may be added by providing templates to the XSLT that implements the middle of these three processes: `directory-listing.xsl`. 
 
 For an example, see the [manifest.md](manifest.md).
 
-Interestingly, note that  [directory-manifest.xpl](directory-manifest.xpl) is unable to open and inspect itself run under XProc 1.0 / XML Calabash - while the same logic in [directory-manifest3.xpl](directory-manifest3.xpl) functions as expected in XProc 3.0 / Morgana.
-
 ### Further development
 
-The application of course leverages XML's transparency in an XML processing context, but it also aims to be lightweight, producing Markdown (suitable for further editing) rather than a 'smarter' more highly structured output -- and not working very hard at inferencing either.
+The application leverages XML's transparency in an XML processing context, but it also aims to be lightweight, producing Markdown (suitable for further editing) rather than a 'smarter' more highly structured output -- and not working very hard at inferencing either.
 
 With some extension, the same approach could be used to produce metadata feeds or basically any directory-level metadata containing this info. Elaborations on the input side could take advantage of native documentation and literate-programming apparatus such as embedded XSD or XSLT documentation.
