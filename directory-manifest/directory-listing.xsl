@@ -62,7 +62,6 @@
 
   <xsl:template match="xsl:stylesheet/xsl:param" mode="report">
     <p>Stylesheet parameter <code>{ @name }</code> { @as/(' as ' || .) }</p>
-    <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
   <xsl:template match="xsl:include | xsl:import" mode="report">
@@ -100,7 +99,6 @@
 
   <xsl:template match="p:option" mode="report">
     <p>Runtime option <code>{ @name }</code> { @as/(' as ' || .) }</p>
-    <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
   
@@ -115,7 +113,7 @@
 
   <xsl:template match="/*" mode="report" expand-text="true" priority="-0.1">
     <p>Document '{ name() }'{ if (namespace-uri(.)) then (' in namespace ' || namespace-uri(.)) else ', in no namespace'} ({ count(//*) } { if (empty(/*/*)) then ' element' else ' elements' })</p>
-    <xsl:apply-templates mode="#current"/>
+    <!--<xsl:apply-templates mode="#current"/>-->
     <!--<p>{ serialize(.) }</p>-->
   </xsl:template>
   
