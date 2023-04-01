@@ -45,7 +45,7 @@
     <xsl:variable name="file-document">
       <xsl:try select="document($filepath,.)">
         <xsl:catch>
-          <err:error>File {} doesn't parse: { $err:code } | { $err:description }</err:error>
+          <err:error>File { @name } parse failure [{ $err:code }]: { $err:description }</err:error>
         </xsl:catch>
       </xsl:try>
     </xsl:variable>
@@ -63,7 +63,7 @@
     </p>
   </xsl:template>
 
-  <xsl:template match="err:error" mode="report" priority="1">
+  <xsl:template match="/err:error" mode="report" priority="1">
     <p>{ . }</p>
   </xsl:template>
     

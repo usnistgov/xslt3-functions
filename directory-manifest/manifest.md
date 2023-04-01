@@ -2,7 +2,7 @@
 
 # Directory Manifest: `directory-manifest`
 
-April 1 2023 11:14 a.m. - 2023-04-01T11:14:50.52856-04:00 -
+April 1 2023 1:46 p.m. - 2023-04-01T13:46:59.093547-04:00 -
 
 Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
@@ -17,8 +17,6 @@ Input: A c:directory document such as is delivered by XProc `p:directory-list` s
 Limitations: Built out only for common cases seen so far, YMMV
 
 Note: Logic is extensible to handle analysis/synopsis of any XML document type
-
-File {} doesn't parse: { $err:code } | { $err:description }
 
 ### directory-manifest.xpl
 
@@ -37,6 +35,10 @@ Runtime option `path`
 Reads from (p:document) - `directory-listing.xsl`
 
 Reads from (p:document) - `html-to-markdown.xsl`
+
+### dirlist.xml
+
+Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (15 elements)
 
 ### html-to-markdown.xsl
 
@@ -83,6 +85,10 @@ Reads from (p:with-input) - `html-to-markdown.xsl`
 ### pom.xml
 
 Document 'project', in no namespace (35 elements)
+
+### pomx.xml
+
+File pomx.xml parse failure [err:FODC0002]: org.xml.sax.SAXParseException; systemId: file:/mnt/c/Users/user/Documents/usnistgov/xslt3-functions/directory-manifest/pomx.xml; lineNumber: 64; columnNumber: 7; The element type "build" must be terminated by the matching end-tag "</build>".(The element type "build" must be terminated by the matching end-tag "</build>".)
 
 -----
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Reset XML Calabash home and classpath as needed
-XML_CALABASH=/mnt/c/Users/wap1/Documents/OSS/XMLCalabash
+XML_CALABASH=/mnt/c/Users/user/Documents/OSS/XMLCalabash
 CLASSPATH=$XML_CALABASH/slf4j-simple-1.7.36.jar:$XML_CALABASH/xmlcalabash-1.5.3-110.jar
 
 HEREPATH=$(pwd)
