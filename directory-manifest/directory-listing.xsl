@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"
-  xmlns="http://www.w3.org/1999/xhtml" version="3.0" expand-text="true"
-  exclude-result-prefixes="#all">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:p="http://www.w3.org/ns/xproc"
+  xmlns:c="http://www.w3.org/ns/xproc-step"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:err="http://www.w3.org/2005/xqt-errors"
+  version="3.0"
+  exclude-result-prefixes="#all"
+  expand-text="true">
 
   <!-- Purpose: Produce an HTML report from polling a set of XML files provided as a directory list -->
   <!-- Input: A c:directory document such as is delivered by XProc `p:directory-list` step -->
@@ -37,10 +42,17 @@
 
   <xsl:template match="c:file[matches(@name, '\.(xml|xpl|sch|xsl|xslt|xsd|xspec)$')]">
     <xsl:variable name="filepath" select="parent::c:directory/@xml:base || string(@name)"/>
+    <xsl:variable name="file-document">
+      <xsl:try select="document($filepath,.)">
+        <xsl:catch>
+          <err:error>File {} doesn't parse: { $err:code } | { $err:description }</err:error>
+        </xsl:catch>
+      </xsl:try>
+    </xsl:variable>
     <div>
       <h3>{ @name }</h3>
       <!--<h5>path: { $filepath }:{ doc-available($filepath) } # { document($filepath,.)/*/name() }</h5>-->
-      <xsl:apply-templates select="document($filepath,.)/*" mode="report"/>
+      <xsl:apply-templates select="$file-document/*" mode="report"/>
     </div>
   </xsl:template>
 
@@ -51,6 +63,10 @@
     </p>
   </xsl:template>
 
+  <xsl:template match="err:error" mode="report" priority="1">
+    <p>{ . }</p>
+  </xsl:template>
+    
   <xsl:template match="xsl:stylesheet | xsl:transform" mode="report" priority="1">
     <xsl:variable name="templatecount" select="count(xsl:template)"/>
     <xsl:variable name="functioncount" select="count(xsl:function)"/>
@@ -102,7 +118,7 @@
   </xsl:template>
   
   
-  <xsl:template match="xs:schema" mode="report" priority="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xsl:template match="xs:schema" mode="report" priority="1">
     <xsl:variable name="element-count" select="count(//xs:element)"/>
     <xsl:variable name="top-level-count" select="count(/*/xs:element)"/>
     <p>XML Schema Definition instance ({ $element-count } { if ($element-count eq 1) then 'element' else 'elements' }, { $top-level-count} at top level)</p>

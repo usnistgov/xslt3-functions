@@ -2,13 +2,13 @@
 
 # Directory Manifest: `directory-manifest`
 
-March 31 2023 12:14 p.m. - 2023-03-31T12:14:26.913467-04:00 -
+April 1 2023 11:14 a.m. - 2023-04-01T11:14:50.52856-04:00 -
 
 Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
 ### directory-listing.xsl
 
-XSLT stylesheet version 3.0 (14 templates)
+XSLT stylesheet version 3.0 (15 templates)
 
 Purpose: Produce an HTML report from polling a set of XML files provided as a directory list
 
@@ -17,6 +17,8 @@ Input: A c:directory document such as is delivered by XProc `p:directory-list` s
 Limitations: Built out only for common cases seen so far, YMMV
 
 Note: Logic is extensible to handle analysis/synopsis of any XML document type
+
+File {} doesn't parse: { $err:code } | { $err:description }
 
 ### directory-manifest.xpl
 
