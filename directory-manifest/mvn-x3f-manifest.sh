@@ -29,7 +29,7 @@ HEREPATH="file://${HEREPATH}"
 echo Producing directory manifest ...
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-POM_FILE="${SCRIPT_DIR}/pom.xml"
+POM_FILE="${SCRIPT_DIR}/../pom.xml"
 PIPELINE="${SCRIPT_DIR}/directory-manifest.xpl"
 
 mvn -q \
