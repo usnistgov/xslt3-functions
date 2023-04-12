@@ -2,7 +2,7 @@
 
 # Directory Manifest: `directory-manifest`
 
-April 1 2023 1:46 p.m. - 2023-04-01T13:46:59.093547-04:00 -
+April 12 2023 5:35 p.m. - 2023-04-12T17:35:46.4135981-04:00 -
 
 Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
@@ -20,25 +20,7 @@ Note: Logic is extensible to handle analysis/synopsis of any XML document type
 
 ### directory-manifest.xpl
 
-XProc pipeline version 1.0 (3 steps)
-
-Output ports - `dirlist`, `html`, `md`
-
-Purpose: Provide a pipeline with ports exposed for debugging generating HTML and Markdown from a set of XML files being polled
-
-Steps: retrieves a directory listing; feeds it to an XSLT producing HTML; feeds this result to a Markdown generator
-
-Output: Markdown suitable for placing into a README or other folder-level documentation
-
-Runtime option `path` 
-
-Reads from (p:document) - `directory-listing.xsl`
-
-Reads from (p:document) - `html-to-markdown.xsl`
-
-### dirlist.xml
-
-Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (15 elements)
+Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (13 elements)
 
 ### html-to-markdown.xsl
 
@@ -82,13 +64,9 @@ Reads from (p:with-input) - `directory-listing.xsl`
 
 Reads from (p:with-input) - `html-to-markdown.xsl`
 
-### pom.xml
-
-Document 'project', in no namespace (35 elements)
-
 ### pomx.xml
 
-File pomx.xml parse failure [err:FODC0002]: org.xml.sax.SAXParseException; systemId: file:/mnt/c/Users/user/Documents/usnistgov/xslt3-functions/directory-manifest/pomx.xml; lineNumber: 64; columnNumber: 7; The element type "build" must be terminated by the matching end-tag "</build>".(The element type "build" must be terminated by the matching end-tag "</build>".)
+Failure reading file pomx.xml ::: [err:FODC0002] org.xml.sax.SAXParseException; systemId: file:/C:/Users/wap1/Documents/usnistgov/xslt3-functions/directory-manifest/pomx.xml; lineNumber: 64; columnNumber: 7; The element type "build" must be terminated by the matching end-tag "</build>".(The element type "build" must be terminated by the matching end-tag "</build>".)
 
 -----
 
