@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v="http://csrc.nist.gov/ns/version"
-    exclude-result-prefixes="xs v" version="3.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
+    exclude-result-prefixes="xs x3f" version="3.0">
 
     <!-- Reference for Semantic Versioning 2.0.0: semver.org -->
 
@@ -21,7 +22,7 @@
         *  0 if $A and $B indicate the same version, not counting build metadata
         *  1 if $A is newer than $B
     -->
-    <xsl:function name="v:compare" as="xs:integer">
+    <xsl:function name="x3f:semver-compare" as="xs:integer">
         <xsl:param name="A" as="xs:string"/>
         <xsl:param name="B" as="xs:string"/>
 
@@ -41,9 +42,9 @@
         <xsl:variable name="A-trunc" as="xs:string" select="$remove-build-metadata($A)"/>
         <xsl:variable name="B-trunc" as="xs:string" select="$remove-build-metadata($B)"/>
         <xsl:variable name="A-numeric-parts" as="xs:integer+"
-            select="v:version-to-xyz(normalize-space($A-trunc), false()) ! xs:integer(.)"/>
+            select="x3f:version-to-xyz(normalize-space($A-trunc), false()) ! xs:integer(.)"/>
         <xsl:variable name="B-numeric-parts" as="xs:integer+"
-            select="v:version-to-xyz(normalize-space($B-trunc), false()) ! xs:integer(.)"/>
+            select="x3f:version-to-xyz(normalize-space($B-trunc), false()) ! xs:integer(.)"/>
 
         <!-- Check if the x.y.z parts of $A and $B differ. After finding a difference,
             break out of the loop because the remainder of the string is irrelevant. -->
@@ -166,7 +167,7 @@
         *  0 if $A and $B indicate the same version, not counting build metadata
         *  1 if $A is newer than $B
     -->
-    <xsl:function name="v:compare" as="xs:integer">
+    <xsl:function name="x3f:semver-compare" as="xs:integer">
         <xsl:param name="A" as="xs:string"/>
         <xsl:param name="B" as="xs:string"/>
         <xsl:param name="options" as="map(*)?"/>
@@ -175,13 +176,13 @@
                 <xsl:sequence select="compare($A, $B)"/>
             </xsl:when>
             <xsl:otherwise>
-                <!-- Modify $A and $B as $options indicates, and call the v:compare
+                <!-- Modify $A and $B as $options indicates, and call the x3f:semver-compare
                     function implementation that assumes valid inputs. At that point,
                     if either input is still not a valid Semantic Version 2.0.0
                     string, that function will issue a fatal error. -->
-                <xsl:sequence select="v:compare(
-                    v:normalize-version($A, $options),
-                    v:normalize-version($B, $options)
+                <xsl:sequence select="x3f:semver-compare(
+                    x3f:normalize-version($A, $options),
+                    x3f:normalize-version($B, $options)
                     )"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -201,13 +202,13 @@
           * 'supply-missing-zeros': If true, supply missing y or z as zero.
           * 'remove-leading-zeros': If true, remove leading zeros from x, y, or z.        
     -->
-    <xsl:function name="v:normalize-version" as="xs:string">
+    <xsl:function name="x3f:normalize-version" as="xs:string">
         <xsl:param name="str" as="xs:string"/>
         <xsl:param name="options" as="map(*)"/>
         <xsl:sequence select="$str
-            => v:normalize-space-option($options('normalize-space'))
-            => v:supply-missing-zeros($options('supply-missing-zeros'))
-            => v:remove-leading-zeros($options('remove-leading-zeros'))
+            => x3f:normalize-space-option($options('normalize-space'))
+            => x3f:supply-missing-zeros($options('supply-missing-zeros'))
+            => x3f:remove-leading-zeros($options('remove-leading-zeros'))
             "/>
     </xsl:function>
 
@@ -219,7 +220,7 @@
     
         Assumptions about content of $str: None
     -->
-    <xsl:function name="v:normalize-space-option" as="xs:string">
+    <xsl:function name="x3f:normalize-space-option" as="xs:string">
         <xsl:param name="str" as="xs:string"/>
         <xsl:param name="option" as="xs:boolean?"/>
         <xsl:sequence select="if ($option) then normalize-space($str) else $str"/>
@@ -233,7 +234,7 @@
         identifiers separated by dots, optionally followed by a hyphen and
         more string content.
     -->
-    <xsl:function name="v:supply-missing-zeros" as="xs:string">
+    <xsl:function name="x3f:supply-missing-zeros" as="xs:string">
         <xsl:param name="str" as="xs:string"/>
         <xsl:param name="option" as="xs:boolean?"/>
         <xsl:choose>
@@ -242,7 +243,7 @@
                     select="substring-after($str,'-')"/>
                 <xsl:variable name="modified-xyz-part" as="xs:string"
                     select="$str
-                    => v:version-to-xyz(true())
+                    => x3f:version-to-xyz(true())
                     => string-join('.')
                     "/>
                 <xsl:sequence select="
@@ -265,7 +266,7 @@
         identifiers, optionally followed by a hyphen and another
         series of dot-separated identifiers.
     -->
-    <xsl:function name="v:remove-leading-zeros" as="xs:string">
+    <xsl:function name="x3f:remove-leading-zeros" as="xs:string">
         <xsl:param name="str" as="xs:string"/>
         <xsl:param name="option" as="xs:boolean?"/>
         <xsl:choose>
@@ -320,7 +321,7 @@
         numeric identifiers separated by dots, optionally followed by more
         string content that the function ignores.
     -->
-    <xsl:function name="v:version-to-xyz" as="xs:string+">
+    <xsl:function name="x3f:version-to-xyz" as="xs:string+">
         <xsl:param name="ver" as="xs:string"/>
         <xsl:param name="supply-missing-zeros" as="xs:boolean"/>
         <xsl:analyze-string select="$ver" regex="^([0-9]+)(\.([0-9]+))?(\.([0-9]+))?">
