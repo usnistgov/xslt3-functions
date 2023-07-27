@@ -1,4 +1,4 @@
-# OSCAL XSLT3 Functions
+# NIST/ITL/CSD XSLT3 Functions
 
 Courtesy of NIST ITL/CSD (Information Technology Laboratory, Computer Security Division), a library of general-use XSLT functions.
 
@@ -20,7 +20,7 @@ If there is interest in XSLT to support OSCAL JSON, YAML or other notations, ple
 
 ###  Project purpose and maturity
 
-The OSCAL project has published XSLT since 2018. Over this time it has grown in complexity, warranting a reorganization and refactoring of the development efforts that have supported it.
+The [OSCAL project](https://pages.nist.gov/OSCAL) has published XSLT since 2018. Over this time it has grown in complexity, warranting a reorganization and refactoring of the development efforts that have supported it.
 
 Current refactoring (2022) encapsulates XSLT functionality supporting OSCAL into two repositories, the [OSCAL XSLT](https://github.com/usnistgov/oscal-xslt) repository, and this one. This repository includes logic of general use (i.e., not specific to OSCAL use cases or implementation), and is kept kept separate in order to facilitate reuse of these offerings outside the OSCAL context, potentially (but not necessarily) as a git submodule.
 
