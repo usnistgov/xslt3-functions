@@ -7,6 +7,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <saxon.version>12.4</saxon.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -34,7 +35,7 @@
         <dependency>
             <groupId>net.sf.saxon</groupId>
             <artifactId>Saxon-HE</artifactId>
-            <version>11.5</version>
+            <version>${saxon.version}</version>
         </dependency>
         <dependency>
             <groupId>com.xmlcalabash</groupId>
@@ -59,6 +60,43 @@
                         <configuration/>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.nkutsche</groupId>
+                <artifactId>xspec-maven-plugin</artifactId>
+                <version>2.0.1</version>
+                <executions>
+                    <execution>
+                        <id>run-xspec</id>
+                        <goals>
+                            <goal>run-xspec</goal>
+                        </goals>
+                        <phase>test</phase>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <version>${saxon.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.xspec</groupId>
+                        <artifactId>xspec</artifactId>
+                        <version>2.3.2</version>
+                        <classifier>enduser-files</classifier>
+                        <type>zip</type>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <addDependenciesToClasspath>true</addDependenciesToClasspath>
+                    <generateSurefireReport>true</generateSurefireReport>
+                    <testDir>${project.basedir}</testDir>
+                    <excludes>
+                        <!-- Skip tests that are within the XSpec repo itself -->
+                        <exclude>target/**</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
