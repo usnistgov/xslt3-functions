@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description
+   xmlns:x="http://www.jenitennison.com/xslt/xspec"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   stylesheet="ixml-demo.xsl"
+   xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
+   xslt-version="3.0">
+
+   <x:scenario>
+      <x:label>Parsing some dates</x:label>
+      <x:scenario label="okay date">
+         <x:call function="x3f:date_or_bust">
+            <x:param>
+               <x3f:dateTime>2024-01-20</x3f:dateTime>
+            </x:param>
+         </x:call>
+         <x:expect label="is okay">
+            <date>
+               <year>2024</year>
+               <month>01</month>
+               <day>20</day>
+            </date>
+         </x:expect>
+      </x:scenario>
+      <x:scenario label="bad date">
+         <x:call function="x3f:date_or_bust">
+            <x:param>
+               <x3f:dateTime>2024-01-0</x3f:dateTime>
+            </x:param>
+         </x:call>
+         <x:expect label="looks bad">
+            <x3f:ERROR>BUST on '2024-01-0'</x3f:ERROR>
+         </x:expect>
+      </x:scenario>
+      <x:scenario label="okay date-time - to minutes">
+         <x:call function="x3f:date_or_bust">
+            <x:param>
+               <x3f:dateTime>2024-01-18T14:44</x3f:dateTime>
+            </x:param>
+         </x:call>
+         <x:expect label="is okay">
+            <local-datetime>
+               <year>2024</year>
+               <month>01</month>
+               <day>18</day>
+               <hour>14</hour>
+               <minute>44</minute>
+            </local-datetime>
+         </x:expect>
+      </x:scenario>
+      <x:scenario label="okay date-time - to seconds">
+         <x:call function="x3f:date_or_bust">
+            <x:param>
+               <x3f:dateTime>2024-01-18T14:44:10</x3f:dateTime>
+            </x:param>
+         </x:call>
+         <x:expect label="is okay">
+            <local-datetime>
+               <year>2024</year>
+               <month>01</month>
+               <day>18</day>
+               <hour>14</hour>
+               <minute>44</minute>
+               <second>10</second>
+            </local-datetime>
+         </x:expect>
+      </x:scenario>
+      <x:scenario label="okay date-time -- all the way">
+         <x:call function="x3f:date_or_bust">
+            <x:param>
+               <x3f:dateTime>2024-01-18T14:44:10.777578600-05:00</x3f:dateTime>
+            </x:param>
+         </x:call>
+         <x:expect label="is okay">
+            <local-datetime>
+               <year>2024</year>
+               <month>01</month>
+               <day>18</day>
+               <hour>14</hour>
+               <minute>44</minute>
+               <second>10</second>
+               <fractional-second>777578600</fractional-second>
+               <utc-offset>
+                  <offset-hour direction="-">05</offset-hour>
+                  <offset-minute>00</offset-minute>
+               </utc-offset>
+            </local-datetime>
+         </x:expect>
+      </x:scenario>
+   </x:scenario>
+   
+</x:description>
