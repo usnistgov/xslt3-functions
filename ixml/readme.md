@@ -1,10 +1,15 @@
 # Invisible XML support
 
+
+For more on Invisible XML:
+  - https://invisiblexml.org/
+  - https://github.com/usnistgov/ixml-breadboard
+
 Aims:
 
-- Demonstrate and document some minimal iXML functionality in XSLT
+- Demonstrate and document some minimal iXML functionality in XSLT v3
 - Include iXML support in XSpec testing of this XSLT
-- Address and document configuration issues in different runtimes (XProc, Ant, Saxon from CL, oXygen)
+- Address and document configuration issues in different runtimes (e.g.: XProc, Ant, Saxon from CL, oXygen XML)
 
 
 ## To do
@@ -21,7 +26,7 @@ It defines ISO dateTime format such that it can be parsed into an XML representa
 
 ## iXML setup
 
-The Invisible XML Library is made available to an XSLT engine such as Saxon as an extension function library.
+To support Invisible XML (iXML), libraries from NineML can be made available to an XSLT engine such as Saxon as an extension function library. NineML, a set of Invisible XML tools by Norm Walsh, is documented at http://nineml.org. It is selected here because of platform compatibility with Saxon.
 
 Setting up the extension will depend on the processing architecture, whether Ant, XProc, a Java application or calling Saxon directly from the command line.
 
@@ -39,7 +44,7 @@ A bash script in this folder, `download-jars.sh` (cribbed from Norm Walsh) is pr
 
 ### Saxon configuration
 
-An initialization setting is provided to Saxon: `init:org.nineml.coffeesacks.RegisterCoffeeSacks`
+An initialization setting must be provided to Saxon: `init:org.nineml.coffeesacks.RegisterCoffeeSacks`
 
 How you pass this to Saxon will depend on the tooling.
 
@@ -47,22 +52,24 @@ How you pass this to Saxon will depend on the tooling.
 
 **oXygen XML Editor** (or **Developer**) can run your XSLT and your XSpec, and your iXML with it.
 
-Norm Walsh offers hints here:
-
-https://github.com/nineml/HOWTO/tree/main/oxygen
-
-But when we don't need to parameterize for the inputs, it turns out to be a little simpler than the example depicted:
+Norm Walsh offers [some hints](https://github.com/nineml/HOWTO/tree/main/oxygen). However, when we don't need to parameterize to handle inputs, it turns out to be a little simpler than the example depicted:
 
 #### Using a scenario
 
-For running an XSLT like `ixml-demo.xsl`, which
-  - Binds the extension namespace
-  - Provides a function for each grammar you wish to parse
+For running [an XSLT like `ixml-demo.xsl`](ixml-demo.xsl), which
+  - binds the extension namespace
+  - includes or references one or more iXML grammars
+  - using the extension, provides functions supporting syntax defined by those grammars
 
 Configure a Transoformation Scenario for running it
 
-- Add three jar files (as named above) as extensions to the oXygen scenario: **CoffeeGrinder**, **CoffeeFilter**, **CoffeeSacks**
-- Set up the Initializer under the Scenario's *Saxon Transformer* options:  `org.nineml.coffeesacks.RegisterCoffeeSacks`
+- Locate three jar files (as named above): **CoffeeGrinder**, **CoffeeFilter**, **CoffeeSacks**
+- Create an XSLT Scenario for applying your XSLT with appropriate settings
+- Add each of these as a Library under Extensions on this scenario (XSLT tab)
+- Under the Transformation Scenario's *Saxon Transformer* options, list the Initializer:  `org.nineml.coffeesacks.RegisterCoffeeSacks`
+- Save the Scenario
+
+This scenario will be able to execute CoffeeSacks functions supporting iXML parsing in your XSLT.
 
 #### iXML in XSpec in oXygen
 
@@ -75,4 +82,4 @@ Copy the built in **Run XSpec** framework for XSpec in Ant, and adjust its Ant s
 - The three jar files are added to the libraries (from the button on the bottom right on Options tab)
 - The value `init:org.nineml.coffeesacks.RegisterCoffeeSacks` is added to saxon.custom.options` parameter (middle tab)
 
-Your XSpec should run as XPected.
+Again your XSpec should run as XPected.
