@@ -39,7 +39,7 @@
 
    <xsl:template match="x3f:dateTime">
       <x3f:test in="{ . }">
-         <xsl:sequence select="mx:date_or_bust(.)"/>
+         <xsl:sequence select="x3f:date_or_bust(.)"/>
       </x3f:test>
    </xsl:template>
 
