@@ -26,7 +26,7 @@ Current refactoring (2022) encapsulates XSLT functionality supporting OSCAL into
 
 Future development of this resource depends largely on uptake and engagement from users who find it valuable. If you have an interest in keeping this code base viable, please make your needs and ideas known to the developers. Demonstrations that take us further into features of XSLT 3 that are demonstrably useful, whether in functionality or architecture (e.g., packaging), are particularly welcome.
 
-See the readme in each project to gauge its scope of application, approach to design, and level of testing. Several of the applications are also accompanied by test suites using the [XSpec XSLT Unit Testing framework](https://github.com/xspec/xspec/).
+See the readme in each project to gauge its scope of application, approach to design, and level of testing. Several of the applications are also accompanied by test suites using the [XSpec XSLT Unit Testing framework](https://github.com/xspec/xspec/), and these XSpec tests run automatically in GitHub.
 
 ###  Repository contents
 
@@ -51,6 +51,10 @@ Generally speaking these are XSLT applications, either single transformations, s
 As such they will run on any platform supporting this industry-standard, publicly available and externally specified language. The leading open-source XSLT implementation currently is Saxon from [Saxonica](https://saxonica.com/welcome/welcome.xml), available for several platforms and frequently bundled with XML editors or IDE software. However, we also welcome reports respecting other XSLT implementations supporting the appropriate XSLT version (generally 3.0).
 
 See each project for details on its runtime requirements. Most often, single and stacked XSLTs can be executed using simple calls from a command prompt, or easily configured within tools. Pipelines may be implemented in XSLT 3.0, or may be supported via [XProc](https://xproc.org/), or both.
+
+To run XSpec tests locally, execute `mvn test` from the top level of your clone. The process picks up files with the `.xspec` filename extension, and the output should say `[INFO] BUILD SUCCESS` near the end.
+
+If your local, in-progress work includes failing XSpec tests, you can mark them as [pending](https://github.com/xspec/xspec/wiki/Focusing-Your-Efforts#marking-scenario-or-expectation-as-pending) or exclude them from the automatic test run. In `pom.xml`, the [`<excludes>` section](https://github.com/usnistgov/xslt3-functions/blob/0f41f56caeeefb39c090a1f3e587dd95b3136088/pom.xml#L95) supports exclusions of files or directories.
 
 ## Contact information
 
