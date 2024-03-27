@@ -98,6 +98,8 @@
                        <exclude>xspec-dev/xspec/**</exclude>
                        <!-- excluding XSpec requiring iXML extensions to XSLT -->
                        <exclude>ixml/ixml-parsing.xspec</exclude>
+                       <!-- and one with a deliberately broken test -->
+                       <exclude>xspec-dev/testing/xspec-shell.xspec</exclude>
                     </excludes>
                 </configuration>
             </plugin>
