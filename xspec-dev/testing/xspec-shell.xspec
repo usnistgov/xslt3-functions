@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../xspec-assurance.sch"?>
+<x:description xmlns:mx="http://csrc.nist.gov/ns/csd/metaschema-xslt"
+   xmlns="http://example.com/ns/computer"
+   xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   stylesheet="copy_me.xsl" xslt-version="3.0">
+
+   <x:scenario label="A Success and a failure">
+      <x:call function="true"/>
+      <x:scenario label="includes success">
+         <x:expect label="True is true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="and not">
+         <x:expect label="False isn't" select="false()"/>
+      </x:scenario>
+   </x:scenario>
+
+   <x:scenario label="Comments are copied and PIs are dropped">
+      <x:scenario label="Pending comment" pending="comment">
+         <x:variable name="mx:a-comment"><!--comment--></x:variable>
+         <x:context select="$mx:a-comment"/>
+         <x:expect label="is copied" select="$mx:a-comment"/>
+      </x:scenario>
+      <x:scenario label="Comment">
+         <x:variable name="mx:a-comment"><!--comment--></x:variable>
+         <x:context select="$mx:a-comment"/>
+         <x:expect label="is copied" select="$mx:a-comment"/>
+      </x:scenario>
+      <x:scenario label="Processing instruction">
+         <x:context><?pi type="sample" href="file.css"?></x:context>
+         <x:expect label="is dropped" select="()"/>
+      </x:scenario>
+   </x:scenario>
+   
+</x:description>
