@@ -96,6 +96,7 @@
                         <!-- excluding XSpec requiring iXML extensions to XSLT -->
                         <exclude>ixml/ixml-parsing.xspec</exclude>
                         <!-- Skip tests that are within the XSpec repo itself -->
+                       <exclude>target/**</exclude>
                        <exclude>xspec-dev/xspec/**</exclude>
                     </excludes>
                 </configuration>
