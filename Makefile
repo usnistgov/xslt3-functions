@@ -10,9 +10,6 @@ dirs:=$(shell find '.' ! -wholename ./Makefile -name 'Makefile' -printf "%h\n")
 module_path:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 output_folder:=$(module_path)/test_output
 
-xspec_script:=./xspec-dev/mvn-saxon-xspec-batch-quiet.sh
-xspec_ci_script:=./xspec-dev/mvn-saxon-xspec-batch.sh
-
 # $folder can be passed in as folder=[folder]
 folder?=.
 
