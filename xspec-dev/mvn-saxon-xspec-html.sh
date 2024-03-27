@@ -3,7 +3,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../common/subcommand_common.bash
 
-source "$SCRIPT_DIR/../../common/subcommand_common.bash"
+source "$SCRIPT_DIR/../common/subcommand_common.bash"
 
 XSLT_FILE="${SCRIPT_DIR}/XSPEC-SINGLE.xsl"
 

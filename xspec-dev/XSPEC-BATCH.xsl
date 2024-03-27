@@ -72,7 +72,7 @@
      
      -->
    
-   <xsl:param name="baseURI" as="xs:string" select="resolve-uri('../..', static-base-uri())"/>
+   <xsl:param name="baseURI" as="xs:string" select="resolve-uri('./..', static-base-uri())"/>
    
    <xsl:param name="folder"  as="xs:string">.</xsl:param>
 

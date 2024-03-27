@@ -3,7 +3,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../common/subcommand_common.bash
 
-source "$SCRIPT_DIR/../../common/subcommand_common.bash"
+source "$SCRIPT_DIR/../common/subcommand_common.bash"
 
 XPROC_FILE="${SCRIPT_DIR}/xspec-single-report.xpl"
 

@@ -21,7 +21,7 @@ help: ## Show this help message
 	} \
 	{ printf "\033[32m%-30s\033[0m %s\n", $$1, $$2 }'
 
-# The path to the pom directory
+# The path to the Maven POM to use
 pom_path:=./pom.xml
 
 define EXEC_MAVEN

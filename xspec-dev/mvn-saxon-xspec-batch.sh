@@ -5,7 +5,7 @@ set -o pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../common/subcommand_common.bash
 
-source "$SCRIPT_DIR/../../common/subcommand_common.bash"
+source "$SCRIPT_DIR/../common/subcommand_common.bash"
 
 XSLT_FILE="${SCRIPT_DIR}/XSPEC-BATCH.xsl"
 LOGFILE=${LOGFILE:-"xspec_$(date +"%Y%m%d%H%M").log.txt"}
@@ -28,7 +28,7 @@ folder: XSpec inputs are found in the targeted folder, relative to baseURI - def
          (baseURI being set by default to the repository, this gives its /src directory)
         to process outside the repository, pass in an absolute URL or reset baseURI
 
-    e.g. folder=src (sets folder to repository /src)
+    e.g. folder=xspec-dev (sets folder to repository folder /xspec-dev)
 
 pattern: glob-like syntax for file name matching
          cf https://www.saxonica.com/html/documentation12/sourcedocs/collections/collection-directories.html '?select'

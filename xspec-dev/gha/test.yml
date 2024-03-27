@@ -26,16 +26,20 @@ jobs:
           java-version: "${{ env.JAVA_VERSION }}"
       - name: Run unit tests
         run: |
-          make -C src unit-test
+          make unit-test
         id: unit-tests
       - name: Run integration tests
         run: |
-            make -C src smoke-test
+            make smoke-test
         id: integration-tests
       - name: Run specification tests
         run: |
-          make -C src spec-test
+          make spec-test
         id: spec-tests
+      - name: Run XSpecs per project
+        run: |
+          make xspec-tests
+        id: xspec-tests
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3

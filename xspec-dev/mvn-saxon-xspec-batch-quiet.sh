@@ -5,7 +5,7 @@ set -o pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../common/subcommand_common.bash
 
-source "$SCRIPT_DIR/../../common/subcommand_common.bash"
+source "$SCRIPT_DIR/../common/subcommand_common.bash"
 
 XSLT_FILE="${SCRIPT_DIR}/XSPEC-BATCH.xsl"
 LOGFILE=${LOGFILE:-"xspec_$(date +"%Y%m%d%H%M").log.txt"}
@@ -87,11 +87,5 @@ else
   # the process should error out only if stop-on-error=yes, otherwise it will do its best to complete
   # invoke_saxon "${SAXON_ARGS}" 2>${LOGFILE} | echo_on_error "Failure running XSpec: see ${LOGFILE}" | tee ${LOGFILE}
   invoke_saxon "${SAXON_ARGS}" 2>${LOGFILE} | tee ${LOGFILE}
-
-  echo "XSpec testing - logging to ${LOGFILE}"
-
-  # set 2>/dev/null to drop all runtime messages / progress reports instead of logging
-  # the process should error out only if stop-on-error=yes, otherwise it will do its best to complete
-  invoke_saxon "${SAXON_ARGS}" 2>&1 | tee ${LOGFILE}
 
 fi
