@@ -19,11 +19,11 @@ XSpec in its current form *nearly* meets this need on its own, but it also has o
 
 Requirements in summary:
 
-- Runs interactively and under CI/CD
-- From the command line with convenient tooling (XML can be 'inside the box')
+- Run interactively and under CI/CD
 - For both individual XSpecs and sets
+- Works as a 'black box' from the command line with familiar tooling
 - Scriptable, with example scripts to copy, clone or emulate
-- XML plumbing uses standards and is accessible for study and adaptation
+- XML plumbing follows standards and is accessible for study and adaptation
 
 #### Features
 
@@ -36,9 +36,39 @@ Requirements in summary:
 #### Known limitations:
 
 - Doesn't (yet) do XQuery or Schematron XSpec
-- New presentation stylesheet is still under development
+- New presentation stylesheet is still in development
 
-## Pipelines
+## How to use
+
+You need:
+
+- [Apache Maven](https://maven.apache.org/) with a JDK
+  - Enables running XML and XSLT tools (Saxon, XML Calabash) without installation
+  - Drop-in configuration also requires no Maven expertise
+- `bash` command line to run scripts (tested under Ubuntu)
+- [GNU `make`](https://www.gnu.org/software/make/manual/make.html) to run 'make' scripted routines (if wanted)
+
+To get started:
+
+- Try any script, with a `--help` option
+- Try `make help`
+- Inspect readme docs and resources
+  - XProc 1.0 for XML processing pipelines / process orchestration
+  - XSLT 3.0 for transformations (and pipelines)
+  - XSpec for unit and functional tests of transformations
+- Write your own XSpec testing your own transformation
+- Run it using an available or adapted script
+- Configure CI/CD to run it when a PR is created or modified
+
+## Installing `xspec` submodule
+
+After cloning the project, to install the XSpec submodule be sure and run
+
+```
+> git submodule update --init --recursive
+```
+
+## XML Processing Pipelines
 
 The pipelines in this project depend on prior art in the XSpec repository. Pipelines are currently implemented using XProc 1.0 to be run under XML Calabash, or in pure XSLT 3.0 to be run under Saxon.
 
