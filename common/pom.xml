@@ -2,12 +2,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gov.nist.secauto.oscal.tools.core</groupId>
-    <artifactId>xslt3-functions-support</artifactId>
+    <artifactId>metaschema-processing-support</artifactId>
     <version>1.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <saxon.version>12.4</saxon.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -24,6 +23,10 @@
         redirect. https://github.com/restlet/restlet-framework-java/issues/1390
     -->
     <repositories>
+       <repository>
+          <id>Maven Central</id>
+          <url>https://repo1.maven.org/maven2</url>
+       </repository>
         <repository>
             <id>maven.restlet.org</id>
             <name>maven.restlet.org</name>
@@ -35,13 +38,34 @@
         <dependency>
             <groupId>net.sf.saxon</groupId>
             <artifactId>Saxon-HE</artifactId>
-            <version>${saxon.version}</version>
+            <version>11.5</version>
         </dependency>
         <dependency>
             <groupId>com.xmlcalabash</groupId>
             <artifactId>xmlcalabash</artifactId>
             <version>1.5.3-110</version>
         </dependency>
+       
+       <!-- https://mvnrepository.com/artifact/org.nineml/coffeegrinder -->
+       <dependency>
+          <groupId>org.nineml</groupId>
+          <artifactId>coffeegrinder</artifactId>
+          <version>3.2.6</version>
+          <scope>runtime</scope>
+       </dependency>
+       <dependency>
+          <groupId>org.nineml</groupId>
+          <artifactId>coffeefilter</artifactId>
+          <version>3.2.6</version>
+          <scope>runtime</scope>
+       </dependency>
+       <dependency>
+          <groupId>org.nineml</groupId>
+          <artifactId>coffeesacks</artifactId>
+          <version>3.2.6</version>
+          <scope>runtime</scope>
+       </dependency>
+       
     </dependencies>
 
     <build>
@@ -60,45 +84,6 @@
                         <configuration/>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.nkutsche</groupId>
-                <artifactId>xspec-maven-plugin</artifactId>
-                <version>2.0.1</version>
-                <executions>
-                    <execution>
-                        <id>run-xspec</id>
-                        <goals>
-                            <goal>run-xspec</goal>
-                        </goals>
-                        <phase>test</phase>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sf.saxon</groupId>
-                        <artifactId>Saxon-HE</artifactId>
-                        <version>${saxon.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>io.xspec</groupId>
-                        <artifactId>xspec</artifactId>
-                        <version>2.3.2</version>
-                        <classifier>enduser-files</classifier>
-                        <type>zip</type>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <addDependenciesToClasspath>true</addDependenciesToClasspath>
-                    <generateSurefireReport>true</generateSurefireReport>
-                    <testDir>${project.basedir}</testDir>
-                    <excludes>
-                        <!-- excluding XSpec requiring iXML extensions to XSLT -->
-                        <exclude>ixml/ixml-parsing.xspec</exclude>
-                        <!-- Skip tests that are within the XSpec repo itself -->
-                       <exclude>xspec-dev/xspec/**</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>

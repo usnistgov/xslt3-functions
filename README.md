@@ -12,25 +12,44 @@ It is motivated primarily by the need to make available to the community and pub
 
 Most of the code here is not intended to be used standalone, but rather as imports (generally `xsl:import`) from external code. As documented per utility, however, demonstrations may be included to show how to use them, which can be executed independently of any other configuration. Additionally, some functionality has been unit tested (sometimes fairly exhaustively), with unit tests included.
 
-To use these transformations a conformant XSLT 3.0 transformation engine is required such as [Saxon 11](https://saxonica.com/documentation11/documentation.xml) from Saxonica (see SourceForge for the free-to-use HE version), which is available on several platforms and sometimes bundled with commercial software. Outside that practical requirement, this library is free to use and open for contributions.
-
-Applications here for the most part assume inputs to be OSCAL XML, as distinct from OSCAL in other data formats such as JSON and YAML. Please convert your data first into XML before attempting to work further with these tools. XSLT-based data converters for OSCAL (capable of generating OSCAL XML from valid OSCAL JSON) are available in the [main repository](https://github.com/usnistgov/OSCAL/tree/main/xml/convert).
-
-If there is interest in XSLT to support OSCAL JSON, YAML or other notations, please express this requirement to the developers.
+To use these transformations a conformant XSLT 3.0 transformation engine is required such as [Saxon 12](https://saxonica.com/documentation12/documentation.xml) from Saxonica (see SourceForge for the free-to-use HE version), which is available on several platforms and sometimes bundled with commercial software. Outside that practical requirement, this library is free to use and open for contributions.
 
 ###  Project purpose and maturity
 
-The [OSCAL project](https://pages.nist.gov/OSCAL) has published XSLT since 2018. Over this time it has grown in complexity, warranting a reorganization and refactoring of the development efforts that have supported it.
-
-Current refactoring (2022) encapsulates XSLT functionality supporting OSCAL into two repositories, the [OSCAL XSLT](https://github.com/usnistgov/oscal-xslt) repository, and this one. This repository includes logic of general use (i.e., not specific to OSCAL use cases or implementation), and is kept kept separate in order to facilitate reuse of these offerings outside the OSCAL context, potentially (but not necessarily) as a git submodule.
+Some of this code originates with the [OSCAL project](https://pages.nist.gov/OSCAL), which has published XSLT since 2018. Over this time it has grown in complexity and refactored into several supporting repositories, including this one.
 
 Future development of this resource depends largely on uptake and engagement from users who find it valuable. If you have an interest in keeping this code base viable, please make your needs and ideas known to the developers. Demonstrations that take us further into features of XSLT 3 that are demonstrably useful, whether in functionality or architecture (e.g., packaging), are particularly welcome.
 
 See the readme in each project to gauge its scope of application, approach to design, and level of testing. Several of the applications are also accompanied by test suites using the [XSpec XSLT Unit Testing framework](https://github.com/xspec/xspec/).
 
-###  Repository contents
+##  Repository contents
 
 See the subdirectory list for projects and applications currently supported.
+
+Additionally to the project folders are resources at the top level:
+
+
+- `.github` - for Github CI/CD
+- `common` - holds common `bash` scripting - utilities for reuse
+- `support` - contains submodules, dynamic resources and libraries (or scripts for downloading them), also [XSpec support in development](support/xspec-dev/),
+
+## Running and building on applications
+
+As a 4GL, XSLT is well suited for certain types of applications, as it is hoped this site demonstrates. The resources offered here can be used and adapted for many different platforms and runtimes. While an effort has been made to create no dependendencies on tooling that is costly, encumbering in any way, or hard to acquire, at the same time the applications and interfaces offered and described here should not be considered to be normative or necessary, but as examples for evaluation only.
+
+## `make` support
+
+This repository supports command-line access to its tools via `make`, configured in each folder (when supported) by a `Makefile` configuration.
+
+From any directory, `make --help` from a `bash` command line will show scripted logic for that directory, if any is available.
+
+Make tasks with certain target designations can be run under CI/CD - tbd
+
+## CI/CD
+
+Currently CI/CI is set to use an XProc configuration that runs all available XSpec instances.
+
+Scripts for more granular or targeted application of XSpec under CI/CD are also available from the [XSpec-dev](support/xspec-dev/)
 
 ### Rights and license
 
