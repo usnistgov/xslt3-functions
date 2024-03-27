@@ -74,13 +74,19 @@
     <xsl:text>`</xsl:text>
   </xsl:template>
   
-  <xsl:template match="em">
-    <xsl:text>*</xsl:text>
-    <xsl:apply-templates/>
-    <xsl:text>*</xsl:text>
-  </xsl:template>
-  
-  <xsl:template match="q">
+   <xsl:template match="em | i">
+      <xsl:text>*</xsl:text>
+      <xsl:apply-templates/>
+      <xsl:text>*</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="strong | b">
+      <xsl:text>**</xsl:text>
+      <xsl:apply-templates/>
+      <xsl:text>**</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="q">
     <xsl:text>"</xsl:text>
     <xsl:apply-templates/>
     <xsl:text>"</xsl:text>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns="http://www.w3.org/1999/xhtml" xmlns:x3f="http://csrc.nist.gov/ns/xslt3-functions"
+   xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   stylesheet="html-to-markdown.xsl" xslt-version="3.0">
+
+   <!--
+      Purpose: A very basic XSpec to demonstrate principles and a pattern for testing
+   HTML to Markdown conversion and mapping.
+   
+   Comprehensive coverage even of current functionality is not yet attempted.
+   
+   -->
+   <x:scenario label="directory manifest - HTML to Markdown conversion">
+      <x:scenario label="Page structure">
+         <x:context>
+            <html>
+               <head>
+                  <title>A page</title>
+                  <style type="text/css">/* some style */</style>
+               </head>
+               <body>
+                  <h1>Frankenstein</h1>
+                  <h2>Or, the Modern Prometheus</h2>
+               </body>
+            </html>
+         </x:context>
+         <x:expect label="lets its contents through" xml:space="preserve">
+
+# Frankenstein
+
+## Or, the Modern Prometheus</x:expect>
+      </x:scenario>
+
+      <x:scenario label="Basic p">
+         <x:context>
+            <p>Four score and seven years ago --</p>
+         </x:context>
+         <x:expect label="comes through with line feeds" xml:space="preserve">
+
+Four score and seven years ago --</x:expect>
+      </x:scenario>
+
+      <x:scenario label="Basic inlines">
+         <x:context>our fathers brought forth, on this continent, a <em>new nation</em>, conceived in <strong>Liberty</strong> and dedicated</x:context>
+         <x:expect label="are mapped">our fathers brought forth, on this continent, a *new nation*, conceived in **Liberty** and dedicated</x:expect>
+      </x:scenario>
+
+      <x:scenario label="Code scrub">
+         <x:scenario label="A comment">
+            <x:variable name="x3f:a-comment"><!--comment--></x:variable>
+            <x:context select="$x3f:a-comment"/>
+            <x:expect label="is dropped" select="()"/>
+         </x:scenario>
+         <x:scenario label="A Processing instruction">
+            <x:context><?pi type="sample" href="file.css"?></x:context>
+            <x:expect label="is dropped" select="()"/>
+         </x:scenario>
+      </x:scenario>
+   </x:scenario>
+
+</x:description>
