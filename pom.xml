@@ -93,11 +93,11 @@
                     <generateSurefireReport>true</generateSurefireReport>
                     <testDir>${project.basedir}</testDir>
                     <excludes>
-                        <!-- excluding XSpec requiring iXML extensions to XSLT -->
-                        <exclude>ixml/ixml-parsing.xspec</exclude>
                         <!-- Skip tests that are within the XSpec repo itself -->
                        <exclude>target/**</exclude>
                        <exclude>xspec-dev/xspec/**</exclude>
+                       <!-- excluding XSpec requiring iXML extensions to XSLT -->
+                       <exclude>ixml/ixml-parsing.xspec</exclude>
                     </excludes>
                 </configuration>
             </plugin>
