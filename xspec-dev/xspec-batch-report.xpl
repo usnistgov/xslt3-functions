@@ -9,7 +9,7 @@
             type="mx:xspec-batch"
             version="1.0">
 
-   <!-- Study reference: ./xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
+   <!-- Study reference: ../lib/xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
    
    <!-- This XProc is very similar to xspec-single.xpl, except
        - it doesn't make an HTML report
@@ -41,7 +41,7 @@
       <p:pipe port="result" step="html-report"/>
    </p:output>
    
-   <p:import href="./xspec/src/harnesses/harness-lib.xpl"/>
+   <p:import href="../lib/xspec/src/harnesses/harness-lib.xpl"/>
 
 
    <!-- Each XSpec is compiled and run -->

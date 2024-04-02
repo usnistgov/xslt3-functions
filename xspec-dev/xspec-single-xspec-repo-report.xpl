@@ -11,14 +11,14 @@
 
    <!-- Like xspec-single-report.xpl, except uses the 'classic' XSpec distribution formatting XSLT  -->
    
-   <!-- Study reference: ./xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
+   <!-- Study reference: ../lib/xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
    
    <p:input port="xspec"/>
    
    <p:input port="parameters" kind="parameter"/>
    
    <!--nb unless patched in the imported XSLT, HTML comes with pseudo-output escaping into Unicode PUA
-       see ./xspec/src/reporter/format-utils.xsl /*/xsl:function[@name='fmt:disable-escaping'] -->
+       see ../lib/xspec/src/reporter/format-utils.xsl /*/xsl:function[@name='fmt:disable-escaping'] -->
    <p:serialization port="html-report" indent="true" method="html"/>
    <p:output port="html-report">
       <p:pipe port="result" step="html-report"/>
@@ -34,7 +34,7 @@
       <p:pipe port="result" step="determination"/>
    </p:output>-->
    
-   <p:import href="./xspec/src/harnesses/harness-lib.xpl"/>
+   <p:import href="../lib/xspec/src/harnesses/harness-lib.xpl"/>
 
    <t:compile-xslt name="compile"><!-- thanks to gimsieke for tip on static-base-uri()
      this can be removed when issue is addressed https://github.com/xspec/xspec/issues/1832 -->      

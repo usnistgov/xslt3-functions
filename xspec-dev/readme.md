@@ -77,7 +77,7 @@ The pipelines in this project depend on prior art in the XSpec repository. Pipel
 
 XProc 3.0 is planned for a later date.
 
-Five pipelines are provided at the top level. All have dependencies on XSpec [in the XSpec distribution included as a repo submodule](./xspec/src/harnesses/). Rather than forking from XSpec, the aim is eventually to offer these capabilities or derivates from them back into the main project.
+Five pipelines are provided at the top level. All have dependencies on XSpec [in the XSpec distribution included as a repo submodule](../lib/xspec/src/harnesses/). Rather than forking from XSpec, the aim is eventually to offer these capabilities or derivates from them back into the main project.
 
 Three pipelines rely on XProc 1.0 / XML Calabash (running Saxon internally):
 

@@ -17,7 +17,7 @@
    
 <!-- NOTE TO DEVS: this is a point of dependency on released XSpec
      If the referenced code moves or changes, this XSLT must be adapted accordingly. -->
-   <xsl:param name="junit-reporter-xslt-path"  as="xs:string">./xspec/src/reporter/junit-report.xsl</xsl:param>
+   <xsl:param name="junit-reporter-xslt-path"  as="xs:string">../lib/xspec/src/reporter/junit-report.xsl</xsl:param>
 
 
    

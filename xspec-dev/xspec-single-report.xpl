@@ -9,7 +9,7 @@
             type="mx:xspec-batch"
             version="1.0">
 
-   <!-- Study reference: ./xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
+   <!-- Study reference: ../lib/xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
    
    <p:input port="xspec"/>
    
@@ -18,7 +18,7 @@
    <p:option name="theme" select="'clean'"/>
    
    <!--nb unless patched in the imported XSLT, HTML comes with pseudo-output escaping into Unicode PUA
-       see ./xspec/src/reporter/format-utils.xsl /*/xsl:function[@name='fmt:disable-escaping'] -->
+       see ../lib/xspec/src/reporter/format-utils.xsl /*/xsl:function[@name='fmt:disable-escaping'] -->
    <p:serialization port="xspec-result" indent="true" method="html"/>
    <p:output port="xspec-result">
       <p:pipe port="result" step="evaluate-xspec"/>
@@ -39,7 +39,7 @@
       <p:pipe port="result" step="determination"/>
    </p:output>-->
    
-   <p:import href="./xspec/src/harnesses/harness-lib.xpl"/>
+   <p:import href="../lib/xspec/src/harnesses/harness-lib.xpl"/>
 
    <t:compile-xslt name="compile"><!-- thanks to gimsieke for tip on static-base-uri()
      this can be removed when issue is addressed https://github.com/xspec/xspec/issues/1832 -->      

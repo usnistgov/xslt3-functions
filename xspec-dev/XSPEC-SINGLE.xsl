@@ -32,7 +32,7 @@
         generated from the source data (using a transformation)
    -->
    
-   <xsl:param name="compiler-xslt-path" as="xs:string">./xspec/src/compiler/compile-xslt-tests.xsl</xsl:param>
+   <xsl:param name="compiler-xslt-path" as="xs:string">../lib/xspec/src/compiler/compile-xslt-tests.xsl</xsl:param>
    
    <!-- in no mode, the imported stylesheet makes HTML reports from XSpec execution results -->
    <xsl:import href="xspec-mx-html-report.xsl"/>
