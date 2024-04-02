@@ -1,11 +1,16 @@
 include common/make_common.mk
 
-# Each subdirectory (recursively) that has a makefile
+# We'd like to descend to each subdirectory (recursively) that has a makefile
 # Makefile wildcard function does not support that, so we use the shell
-# function with the find utility and look ever Makefile in a child dir
-# relative to this one, but exclude this one to use with the FOREACH macro.
+# function with the find utility and examine each Makefile in a child dir
+# relative to this one, excluding this one to use with the FOREACH macro.
 dirs:=$(shell find '.' ! -wholename ./Makefile -name 'Makefile' -printf "%h\n")
 
+# This enables project-level configuration. Each project's own Makefile
+# can arrange its own testing accordingly, while making it easy to expose new tests to
+# the CI/CD runtime, by using any of the targets provided for here.
+
+# Make logic modeled after an example provided by NW: we are still learning
 
 module_path:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 output_folder:=$(module_path)/test_output

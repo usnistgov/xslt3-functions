@@ -62,7 +62,7 @@ For running [an XSLT like `ixml-demo.xsl`](ixml-demo.xsl), which
   - includes or references one or more iXML grammars
   - using the extension, provides functions supporting syntax defined by those grammars
 
-Configure a Transoformation Scenario for running it
+Configure a Transformation Scenario for running it
 
 - Locate three jar files (as named above): **CoffeeGrinder**, **CoffeeFilter**, **CoffeeSacks**
 - Create an XSLT Scenario for applying your XSLT with appropriate settings
@@ -78,9 +78,11 @@ When writing iXML-based functionality in XSLT, one wishes to be able to test it 
 
 Fortunately it is all Java, so the same settings can be provided to Ant for XSpec run under Ant, hence oXygen scenarios using Ant for XSpec can run these tests as well.
 
-Copy the built in **Run XSpec** framework for XSpec in Ant, and adjust its Ant settings:
+Create a new Scenario in oXygen by copying the built-in **Run XSpec Test** Ant Transformation Scenario. Open the **Configure Transformation Scenarios** dialog (Ctrl-Shift-C) and find **Run XSpec Test** under XSpec, and select Duplicate. Give your new scenario a new name.
 
-- The three jar files are added to the libraries (from the button on the bottom right on Options tab)
-- The value `init:org.nineml.coffeesacks.RegisterCoffeeSacks` is added to saxon.custom.options` parameter (middle tab)
+Then:
+
+- Add the three jar files to the set of libraries (from the button on the bottom right on Options tab)
+- Add the value `init:org.nineml.coffeesacks.RegisterCoffeeSacks` to the `saxon.custom.options` parameter (middle tab)
 
 Again your XSpec should run as XPected.

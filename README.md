@@ -12,7 +12,7 @@ It is motivated primarily by the need to make available to the community and pub
 
 Most of the code here is not intended to be used standalone, but rather as imports (generally `xsl:import`) from external code. As documented per utility, however, demonstrations may be included to show how to use them, which can be executed independently of any other configuration. Additionally, some functionality has been unit tested (sometimes fairly exhaustively), with unit tests included.
 
-To use these transformations a conformant XSLT 3.0 transformation engine is required such as [Saxon 12](https://saxonica.com/documentation12/documentation.xml) from Saxonica (see SourceForge for the free-to-use HE version), which is available on several platforms and sometimes bundled with commercial software. Outside that practical requirement, this library is free to use and open for contributions.
+To use these transformations a conformant XSLT 3.0 transformation engine is required such as [Saxon 12](https://saxonica.com/documentation12/documentation.xml) from Saxonica (see [Github](https://github.com/Saxonica/Saxon-HE/) or [Maven](https://central.sonatype.com/artifact/net.sf.saxon/Saxon-HE?smo=true) for the free-to-use HE version), which is available on several platforms and sometimes bundled with commercial software. Outside that practical requirement, this library is free to use and open for contributions.
 
 ###  Project purpose and maturity
 
@@ -47,9 +47,13 @@ Make tasks with certain target designations can be run under CI/CD - tbd
 
 ## CI/CD
 
-Currently CI/CI is set to use an XProc configuration that runs all available XSpec instances.
+Currently CI/CD is set to use an XProc configuration that runs all available XSpec instances.
 
-Scripts for more granular or targeted application of XSpec under CI/CD are also available from the [XSpec-dev](support/xspec-dev/)
+It can be run locally on any platform with a configured Maven installation, using the `test` target:
+
+> mvn test
+
+Scripts for more granular or targeted application of XSpec under CI/CD are also available in the [XSpec-dev](xspec-dev/) application, requiring `bash` and `make`.
 
 ### Rights and license
 

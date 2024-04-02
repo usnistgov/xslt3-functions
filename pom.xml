@@ -95,7 +95,7 @@
                     <excludes>
                         <!-- Skip tests that are within the XSpec repo itself -->
                        <exclude>target/**</exclude>
-                       <exclude>xspec-dev/xspec/**</exclude>
+                       <exclude>lib/xspec/**</exclude>
                        <!-- excluding XSpec requiring iXML extensions to XSLT -->
                        <exclude>ixml/ixml-parsing.xspec</exclude>
                        <!-- and one with a deliberately broken test -->

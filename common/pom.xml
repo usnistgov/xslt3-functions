@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gov.nist.secauto.oscal.tools.core</groupId>
-    <artifactId>metaschema-processing-support</artifactId>
+    <artifactId>java-xml-xslt-support</artifactId>
     <version>1.0.0</version>
 
     <properties>

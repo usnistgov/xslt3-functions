@@ -28,7 +28,5 @@ if [ ! -f MorganaXProc-IIIse-1.3.6/MorganaXProc-IIIse_lib/saxon-he-12.3.jar ]; t
 
 fi
 
-# C:\Users\wap1\Documents\usnistgov\metaschema-xslt\support\lib\MorganaXProc-IIIse-1.3.6\MorganaXProc-IIIse_lib
-
 popd
 
