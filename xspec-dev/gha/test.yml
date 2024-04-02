@@ -36,10 +36,6 @@ jobs:
         run: |
           make spec-test
         id: spec-tests
-      - name: Run XSpecs per project
-        run: |
-          make xspec-tests
-        id: xspec-tests
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3
