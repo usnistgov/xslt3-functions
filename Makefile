@@ -18,10 +18,9 @@ output_folder:=$(module_path)/test_output
 # $folder can be passed in as folder=[folder]
 folder?=.
 
-# Two different ways to use the testing infrastructure
-# - throw any XSpec into a 'tests' directory, and it will be processed
-# - OR, place a Makefile in the project directory
-#     providing scripts for targets smoke-test, spec-test and unit-test as wanted
+
+# See Makefile configuration in project files for examples of how to set up calls to 'make'
+# including wiring XSpec tests and wiring XSpec tests to these (top-level) targets 
 
 
 .PHONY: test
