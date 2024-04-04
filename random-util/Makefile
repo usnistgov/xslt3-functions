@@ -19,16 +19,13 @@ spec-test: xspec-tests ## Run specification tests (currently xspec-tests)
 
 
 .PHONY: xspec-tests
-xspec-tests: ## Run XSpecs found in 'tests' folder
+xspec-tests: ## Run XSpecs found in tests folder
 	mkdir -p $(output_folder)
-	LOGFILE="$(output_folder)/xspec-tests.log" $(xspec_script) \
-		"baseURI=file:$(module_path)/" \
-		"folder=tests" \
-		"report-to=$(output_folder)" \
-		"stop-on-error=no" \
-		"recurse=yes" \
-		"theme=toybox"
-
+	mvn --quiet \
+   	-f "../common/pom.xml" \
+   	exec:java \
+   	-Dexec.mainClass="net.sf.saxon.Transform" \
+   	-Dexec.args="-it:go -xsl:\"../xspec-dev/XSPEC-BATCH.xsl\" -init:org.nineml.coffeesacks.RegisterCoffeeSacks folder=random-util/tests"
 
 .PHONY: clean
 clean: ## Remove test output
