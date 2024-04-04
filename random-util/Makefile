@@ -29,6 +29,7 @@ xspec-tests: ## Run XSpecs found in 'tests' folder
 		"recurse=yes" \
 		"theme=toybox"
 
+
 .PHONY: clean
 clean: ## Remove test output
 	rm -fr $(output_folder)/*
