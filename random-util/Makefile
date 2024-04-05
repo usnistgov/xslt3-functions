@@ -6,9 +6,6 @@ module_path:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 output_folder:=test_output
 
 
-xspec_script:=../xspec-dev/mvn-saxon-xspec-batch-quiet.sh
-xspec_ci_script:=../xspec-dev/mvn-saxon-xspec-batch.sh
-
 .PHONY: test
 test: spec-test ## Run all tests
 
@@ -25,7 +22,7 @@ xspec-tests: ## Run XSpecs found in tests folder
    	-f "../common/pom.xml" \
    	exec:java \
    	-Dexec.mainClass="net.sf.saxon.Transform" \
-   	-Dexec.args="-it:go -xsl:\"../xspec-dev/XSPEC-BATCH.xsl\" -init:org.nineml.coffeesacks.RegisterCoffeeSacks folder=random-util/tests"
+   	-Dexec.args="-it:go -xsl:\"../xspec-dev/XSPEC-BATCH.xsl\" stop-on-error=yes folder=random-util/tests"
 
 .PHONY: clean
 clean: ## Remove test output

@@ -52,7 +52,7 @@
       
       <t:compile-xslt name="compile"><!-- thanks to gimsieke for tip on static-base-uri()
         this can be removed when issue is addressed https://github.com/xspec/xspec/issues/1832-->
-         <p:with-param name="xspec-home" select="resolve-uri('./xspec/',static-base-uri())"/>
+         <p:with-param name="xspec-home" select="resolve-uri('../lib/xspec/',static-base-uri())"/>
       </t:compile-xslt>
 
       <p:xslt name="run" template-name="t:main">

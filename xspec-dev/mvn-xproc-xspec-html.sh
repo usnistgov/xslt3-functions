@@ -5,7 +5,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$SCRIPT_DIR/../common/subcommand_common.bash"
 
-XPROC_FILE="${SCRIPT_DIR}/xspec-single-report.xpl"
+# XPROC_FILE="file://${SCRIPT_DIR}/xspec-single-report.xpl"
+XPROC_FILE="xspec-single-report.xpl"
 
 usage() {
     cat <<EOF
@@ -25,7 +26,7 @@ ADDITIONAL_ARGS=$(shift 1; echo "${*// /\\ }")
 
 RESULT_FILE="xspec/$( echo $(basename "${XSPEC_FILE%.*}") ).html"
 
-CALABASH_ARGS="-ixspec=\"$XSPEC_FILE\" -oxspec-result=/dev/null -ohtml-report=\"${RESULT_FILE}\" \
+CALABASH_ARGS="-ixspec=\"$XSPEC_FILE\" -oxspec-result=\"/dev/null\" -ohtml-report=\"${RESULT_FILE}\" \
                 $ADDITIONAL_ARGS \"${XPROC_FILE}\""
 
 mkdir -p xspec

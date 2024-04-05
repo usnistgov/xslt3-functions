@@ -10,7 +10,9 @@ This repository offers a library of XSLT stylesheets and pipelines supporting ge
 
 It is motivated primarily by the need to make available to the community and public logic that we have coded for use in our projects, but that could (more or less easily) be refitted to uses elsewhere.
 
-Most of the code here is not intended to be used standalone, but rather as imports (generally `xsl:import`) from external code. As documented per utility, however, demonstrations may be included to show how to use them, which can be executed independently of any other configuration. Additionally, some functionality has been unit tested (sometimes fairly exhaustively), with unit tests included.
+The development model for the repository is to aim for a state of punctuated equilibrium, in which a stable code base remains unchanged functionally even while supporting ongoing development and innovation. Each project in this repository should be maintained and documented independently, with its own readme and testing documents. Thus the place to start with any project is the project itself.
+
+At the same time, the different projects will, over the long term, be able to borrow logic from one another to support testing, unit testing, and runtime interfaces supporting broader distribution.
 
 To use these transformations a conformant XSLT 3.0 transformation engine is required such as [Saxon 12](https://saxonica.com/documentation12/documentation.xml) from Saxonica (see [Github](https://github.com/Saxonica/Saxon-HE/) or [Maven](https://central.sonatype.com/artifact/net.sf.saxon/Saxon-HE?smo=true) for the free-to-use HE version), which is available on several platforms and sometimes bundled with commercial software. Outside that practical requirement, this library is free to use and open for contributions.
 
@@ -31,7 +33,7 @@ Additionally to the project folders are resources at the top level:
 
 - `.github` - for Github CI/CD
 - `common` - holds common `bash` scripting - utilities for reuse
-- `support` - contains submodules, dynamic resources and libraries (or scripts for downloading them), also [XSpec support in development](support/xspec-dev/),
+- `lib` - contains submodules, dynamic resources and libraries (or scripts for downloading them)
 
 ## Running and building on applications
 
