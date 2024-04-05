@@ -1,8 +1,8 @@
 # Testing xslt3-functions
 
-This repository is being developed incrementally, in stages. While never ruling out a complete overhaul of organization and resources, we intend most changes to be either at the edges, or isolated within projects. Accordingly, we need a testing model that is both robust and stable enough to be dependable, while also adaptable enough so that any contributor working on a project can use as much or as little of the overall testing infrastructure as seems appropriate.
+This repository is being developed incrementally, in stages. While never ruling out a complete overhaul of organization and resources, we intend most changes to be isolated within projects, when they do not take the form of entirely new work. Accordingly, we need a testing model that is both robust and stable enough to be reliable, while also adaptable enough so that any contributor working on a project can use as much or as little of the generalized infrastructure as seems appropriate.
 
-Testing of utilities offered in this repository includes both informal, interactive testing per project, and in some projects, formal automoated testing of XSLT functionalities using [XSpec](https://github.com/xspec/xspec). Over time it is our hope that all testing will improve by virtue of each project's being able to emulate good practices developed in the context of others.
+Testing of utilities offered in this repository includes both informal, interactive testing per project, and in some projects, formal automated testing of XSLT functionalities using [XSpec](https://github.com/xspec/xspec). Over time it is our hope that all testing will improve by virtue of each project's being able to emulate the successful practice that is developed in any other.
 
 To ensure the integrity of our tests we rely on code review as well as other means.
 
