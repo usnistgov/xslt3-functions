@@ -2,7 +2,7 @@
 
 # Directory Manifest: `directory-manifest`
 
-April 12 2023 5:35 p.m. - 2023-04-12T17:35:46.4135981-04:00 -
+April 3 2024 4:54 p.m. - 2024-04-03T16:54:41.77948-04:00 -
 
 Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
@@ -20,11 +20,11 @@ Note: Logic is extensible to handle analysis/synopsis of any XML document type
 
 ### directory-manifest.xpl
 
-Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (13 elements)
+Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (14 elements)
 
 ### html-to-markdown.xsl
 
-XSLT stylesheet version 3.0 (19 templates)
+XSLT stylesheet version 3.0 (20 templates)
 
 Purpose: Cast HTML into Markdown notation
 
@@ -64,9 +64,13 @@ Reads from (p:with-input) - `directory-listing.xsl`
 
 Reads from (p:with-input) - `html-to-markdown.xsl`
 
-### pomx.xml
+### markdown-from-html.xspec
 
-Failure reading file pomx.xml ::: [err:FODC0002] org.xml.sax.SAXParseException; systemId: file:/C:/Users/wap1/Documents/usnistgov/xslt3-functions/directory-manifest/pomx.xml; lineNumber: 64; columnNumber: 7; The element type "build" must be terminated by the matching end-tag "</build>".(The element type "build" must be terminated by the matching end-tag "</build>".)
+Document 'x:description' in namespace http://www.jenitennison.com/xslt/xspec (29 elements)
+
+### pom.xml
+
+Document 'project', in no namespace (35 elements)
 
 -----
 

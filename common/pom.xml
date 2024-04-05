@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gov.nist.secauto.oscal.tools.core</groupId>
-    <artifactId>ci-cd-deps</artifactId>
+    <artifactId>java-xml-xslt-support</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -23,6 +23,10 @@
         redirect. https://github.com/restlet/restlet-framework-java/issues/1390
     -->
     <repositories>
+       <repository>
+          <id>Maven Central</id>
+          <url>https://repo1.maven.org/maven2</url>
+       </repository>
         <repository>
             <id>maven.restlet.org</id>
             <name>maven.restlet.org</name>
@@ -41,6 +45,27 @@
             <artifactId>xmlcalabash</artifactId>
             <version>1.5.3-110</version>
         </dependency>
+       
+       <!-- https://mvnrepository.com/artifact/org.nineml/coffeegrinder -->
+       <dependency>
+          <groupId>org.nineml</groupId>
+          <artifactId>coffeegrinder</artifactId>
+          <version>3.2.6</version>
+          <scope>runtime</scope>
+       </dependency>
+       <dependency>
+          <groupId>org.nineml</groupId>
+          <artifactId>coffeefilter</artifactId>
+          <version>3.2.6</version>
+          <scope>runtime</scope>
+       </dependency>
+       <dependency>
+          <groupId>org.nineml</groupId>
+          <artifactId>coffeesacks</artifactId>
+          <version>3.2.6</version>
+          <scope>runtime</scope>
+       </dependency>
+       
     </dependencies>
 
     <build>
@@ -61,5 +86,5 @@
                 </executions>
             </plugin>
         </plugins>
-    </buil>
+    </build>
 </project>
