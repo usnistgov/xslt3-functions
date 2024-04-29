@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$SCRIPT_DIR/../common/subcommand_common.bash"
 
-XPROC_FILE="hello.xp1"
+XPROC_FILE="hello.xproc"
 
 usage() {
     cat <<EOF
@@ -25,6 +25,6 @@ then
 
 else
 
-  invoke_calabash "hello.xp1"
+  invoke_calabash "hello.xproc"
 
 fi

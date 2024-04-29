@@ -10,6 +10,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 echo Producing manifest.md for $HEREPATH ...
 
-java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=/dev/null -odirlist=/dev/null $SCRIPT_DIR/directory-manifest.xp1 path=$HEREPATH
+java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=/dev/null -odirlist=/dev/null $SCRIPT_DIR/directory-manifest.xproc path=$HEREPATH
 
 echo ... Done

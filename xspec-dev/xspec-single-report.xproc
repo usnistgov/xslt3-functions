@@ -39,7 +39,7 @@
       <p:pipe port="result" step="determination"/>
    </p:output>-->
    
-   <p:import href="../lib/xspec/src/harnesses/harness-lib.xp1"/>
+   <p:import href="../lib/xspec/src/harnesses/harness-lib.xproc"/>
 
    <t:compile-xslt name="compile"><!-- thanks to gimsieke for tip on static-base-uri()
      this can be removed when issue is addressed https://github.com/xspec/xspec/issues/1832 -->      

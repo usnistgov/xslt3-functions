@@ -8,7 +8,7 @@ set HEREPATH=file:///%HERE:\=/%
 
 set APPLICATION_DIR=%~dp0
 
-call mvn --quiet -f %APPLICATION_DIR%pom.xml exec:java -Dexec.mainClass="com.xmlcalabash.drivers.Main" -Dexec.args="-omd=%HEREPATH%/manifest.md -odirlist=NUL -ohtml=NUL %APPLICATION_DIR%/directory-manifest.xp1 path=%HEREPATH%"
+call mvn --quiet -f %APPLICATION_DIR%pom.xml exec:java -Dexec.mainClass="com.xmlcalabash.drivers.Main" -Dexec.args="-omd=%HEREPATH%/manifest.md -odirlist=NUL -ohtml=NUL %APPLICATION_DIR%/directory-manifest.xproc path=%HEREPATH%"
 
 echo Check for file %HEREPATH%/manifest.md
 

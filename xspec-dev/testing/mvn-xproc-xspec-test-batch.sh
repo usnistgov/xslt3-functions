@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$SCRIPT_DIR/../../common/subcommand_common.bash"
 
-XPROC_FILE="${SCRIPT_DIR}/xspec-test-batch.xp1"
+XPROC_FILE="${SCRIPT_DIR}/xspec-test-batch.xproc"
 REPORT_HTML="xspec-test-report.html"
 
 usage() {

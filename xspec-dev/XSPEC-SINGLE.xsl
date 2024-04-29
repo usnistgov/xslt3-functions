@@ -6,7 +6,7 @@
    exclude-result-prefixes="xs math"
    version="3.0">
    
-   <!-- Like xspec-single-report.xp1, except running as an XSLT
+   <!-- Like xspec-single-report.xproc, except running as an XSLT
    
    accepts runtime parameter theme=clean|classic|uswds|toybox
    to assign a theme to the output

@@ -30,7 +30,7 @@ echo Producing directory manifest ...
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 POM_FILE="${SCRIPT_DIR}/pom.xml"
-PIPELINE="file://${SCRIPT_DIR}/directory-manifest.xp1"
+PIPELINE="file://${SCRIPT_DIR}/directory-manifest.xproc"
 
 echo PIPELINE is $PIPELINE
 

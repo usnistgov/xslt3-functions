@@ -60,11 +60,11 @@ On the command line, a typical XML Calabash call might look like either:
 
 The wrapper (simple interface) pipeline
 
-> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main /path/to/make-markdown-manifest.xp1 dir=$HEREPATH
+> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main /path/to/make-markdown-manifest.xproc dir=$HEREPATH
 
 Alternatively, calling the core pipeline with options set to the same effect:
 
-> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=manifest.html -odirlist=/dev/null /path/to/directory-manifest.xp1 dir=$HEREPATH
+> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=manifest.html -odirlist=/dev/null /path/to/directory-manifest.xproc dir=$HEREPATH
 
 In the core pipeline, `-o` flags indicating output ports for XML Calabash, defined in the pipeline:
 
@@ -95,13 +95,13 @@ Inspect the scripts to see how the calls to Maven are constructed, including bin
 
 Morgana is an implementation of XProc 3.0.
 
-Install the application, adjust paths or scripts, and run the `make-markdown-manifest3.xp1` pipeline.
+Install the application, adjust paths or scripts, and run the `make-markdown-manifest3.xproc` pipeline.
 
 We had to add a copy of SaxonHE to the classpath so the application could find it. This is a known bug and you may not encounter it.
 
 ## Architecture
 
-The XProc pipeline `directory-manifest.xp1` executes three steps:
+The XProc pipeline `directory-manifest.xproc` executes three steps:
 
 - Polls the provided directory path for file contents to produce a file name list
 - Processes this poll through an XSLT filter, dispatching to each file of several known types

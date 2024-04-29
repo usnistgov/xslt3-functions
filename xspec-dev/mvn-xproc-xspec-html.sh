@@ -5,8 +5,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$SCRIPT_DIR/../common/subcommand_common.bash"
 
-# XPROC_FILE="file://${SCRIPT_DIR}/xspec-single-report.xp1"
-XPROC_FILE="xspec-single-report.xp1"
+# XPROC_FILE="file://${SCRIPT_DIR}/xspec-single-report.xproc"
+XPROC_FILE="xspec-single-report.xproc"
 
 usage() {
     cat <<EOF
