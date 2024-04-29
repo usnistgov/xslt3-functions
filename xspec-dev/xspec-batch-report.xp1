@@ -11,7 +11,7 @@
 
    <!-- Study reference: ../lib/xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
    
-   <!-- This XProc is very similar to xspec-single.xpl, except
+   <!-- This XProc is very similar to xspec-single.xp1, except
        - it doesn't make an HTML report
        - it accepts and processes a sequence of XSpecs not just a single -->
     
@@ -41,7 +41,7 @@
       <p:pipe port="result" step="html-report"/>
    </p:output>
    
-   <p:import href="../lib/xspec/src/harnesses/harness-lib.xpl"/>
+   <p:import href="../lib/xspec/src/harnesses/harness-lib.xp1"/>
 
 
    <!-- Each XSpec is compiled and run -->

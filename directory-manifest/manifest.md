@@ -18,7 +18,7 @@ Limitations: Built out only for common cases seen so far, YMMV
 
 Note: Logic is extensible to handle analysis/synopsis of any XML document type
 
-### directory-manifest.xpl
+### directory-manifest.xp1
 
 Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (14 elements)
 
@@ -34,7 +34,7 @@ Output: A block of Markdown, to be serialized using the 'text' method
 
 Note: Aims for Github Markdown more or less, but subject to adjustment, adaptation and extension
 
-### make-markdown-manifest.xpl
+### make-markdown-manifest.xp1
 
 XProc pipeline version 1.0 (3 steps)
 
@@ -42,21 +42,21 @@ Stores - `$path || '/manifest.md'`
 
 Purpose: Produce a directory manifest in Markdown, called `manifest.md`
 
-Description: This is a wrapper XProc around 'directory-manifest.xpl' hiding its ports and writing to (named) file output
+Description: This is a wrapper XProc around 'directory-manifest.xp1' hiding its ports and writing to (named) file output
 
 Output: a Markdown file 'manifest.md' in the current directory
 
 Runtime option `path` 
 
-Reads from (p:import) - `directory-manifest.xpl`
+Reads from (p:import) - `directory-manifest.xp1`
 
-### make-markdown-manifest3.xpl
+### make-markdown-manifest3.xp1
 
 XProc pipeline version 3.0 (4 steps)
 
 Stores - `manifest.md`
 
-Purpose: Same as make-markdown-manifest.xpl, except using XProc 3.0
+Purpose: Same as make-markdown-manifest.xp1, except using XProc 3.0
 
 Runtime option `path` 
 
