@@ -40,7 +40,7 @@
 
   <xsl:template match="c:file[ends-with(@name, 'md')]"/>
 
-  <xsl:template match="c:file[matches(@name, '\.(xml|xpl|sch|xsl|xslt|xsd|xspec)$')]">
+  <xsl:template match="c:file[matches(@name, '\.(xml|xpl|xproc|xp1|xp3|sch|xsl|xslt|xsd|xspec)$')]">
     <xsl:variable name="filepath" select="parent::c:directory/@xml:base || string(@name)"/>
     <xsl:variable name="file-document">
       <xsl:try select="document($filepath,.)">
