@@ -1,5 +1,9 @@
 # XSLT / XProc Directory Manifest
 
+TODO: Update to support XProc 3.0 - match any version of XProc and handle it the same (overloaded XSLT)
+
+---
+
 Writes descriptions of your folder's XML-based contents, dynamically.
 
 Run XProc (1.0 or 3.0) providing the path to the subdirectory you want and it writes out a report.
