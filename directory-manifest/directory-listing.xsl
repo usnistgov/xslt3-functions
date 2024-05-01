@@ -76,11 +76,28 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
-  <xsl:template match="xsl:stylesheet/xsl:param" mode="report">
-    <p>Stylesheet parameter <code>{ @name }</code> { @as/(' as ' || .) }</p>
-  </xsl:template>
-
-  <xsl:template match="xsl:include | xsl:import" mode="report">
+   <xsl:template match="xsl:stylesheet/xsl:param" mode="report">
+      <p>Stylesheet parameter <code>{ @name }</code> { @as/(' as ' || .) }</p>
+   </xsl:template>
+   
+   <xsl:template match="xsl:stylesheet/xsl:function" mode="report">
+      <div class="function">
+      <h4>Stylesheet function <code>{ @name }</code> { @as/(' returning ' || .) }</h4>
+      <xsl:for-each-group select="xsl:param" group-by="true()">
+         <p>
+            <xsl:text>Parameter{ 's'[current-group()[2]=>exists()] }: </xsl:text> 
+            <xsl:apply-templates select="current-group()" mode="#current"/>
+         </p>
+      </xsl:for-each-group>
+      </div>
+   </xsl:template>
+   
+   <xsl:template mode="report" match="xsl:function/xsl:param">
+        <code>{@name}</code>
+        <xsl:for-each select="@as"> ({.})</xsl:for-each>
+   </xsl:template>
+   
+   <xsl:template match="xsl:include | xsl:import" mode="report">
     <p>Compile-time dependency ({ name() }) <code>{ @href }</code></p>
   </xsl:template>
 
