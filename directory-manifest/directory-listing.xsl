@@ -26,7 +26,18 @@
       <body data-path="{$path}">
         <h1>Directory Manifest: <code>{ tokenize($path,'/')[last() - 1] }</code></h1>
         <p class="timestamp">{ current-dateTime() => format-dateTime('[MNn] [D0] [Y] [h0]:[m01] [P]') } - { current-dateTime() } -</p>
-        <p>Listing files suffixed <code>xml</code>, <code>xpl</code>, <code>sch</code>, <code>xsl</code>, <code>xslt</code>, <code>xsd</code> or <code>xspec</code>.</p>
+        <p>Listing files suffixed 
+           <xsl:iterate select="$file-suffixes">
+              <xsl:if test="position() gt 1">
+                 <xsl:choose>
+                    <xsl:when test="position() eq last()"> or </xsl:when>
+                    <xsl:otherwise>, </xsl:otherwise>
+                 </xsl:choose>
+              </xsl:if>
+              <code>{ . }</code>
+           </xsl:iterate>
+           <xsl:text>.</xsl:text>
+        </p>
         <xsl:apply-templates select="//c:file">
           <xsl:sort select="@name"/>
         </xsl:apply-templates>
@@ -40,7 +51,12 @@
 
   <xsl:template match="c:file[ends-with(@name, 'md')]"/>
 
-  <xsl:template match="c:file[matches(@name, '\.(xml|xpl|xproc|xp1|xp3|sch|xsl|xslt|xsd|xspec)$')]">
+  <xsl:variable name="file-suffixes" select="
+     'xml', 'xpl', 'xproc', 'xp1', 'xp3', 'sch', 'xsl', 'xslt', 'xsd', 'xspec'"/>
+   
+  <xsl:variable name="file-regex" as="xs:string">\.{ $file-suffixes => string-join('|') }$</xsl:variable>
+   
+  <xsl:template match="c:file[matches(@name, $file-regex)]">
     <xsl:variable name="filepath" select="parent::c:directory/@xml:base || string(@name)"/>
     <xsl:variable name="file-document">
       <xsl:try select="document($filepath,.)">
@@ -81,20 +97,21 @@
    </xsl:template>
    
    <xsl:template match="xsl:stylesheet/xsl:function" mode="report">
-      <div class="function">
-      <h4>Stylesheet function <code>{ @name }</code> { @as/(' returning ' || .) }</h4>
-      <xsl:for-each-group select="xsl:param" group-by="true()">
-         <p>
-            <xsl:text>Parameter{ 's'[current-group()[2]=>exists()] }: </xsl:text> 
-            <xsl:apply-templates select="current-group()" mode="#current"/>
-         </p>
-      </xsl:for-each-group>
-      </div>
+      <p>
+         <xsl:text>Stylesheet function </xsl:text>
+         <code>{ @name }</code>
+         <xsl:text>(</xsl:text>
+         <xsl:apply-templates select="xsl:param" mode="argstr"/>
+         <xsl:text>)</xsl:text>
+         <xsl:for-each select="@as"> as { . }</xsl:for-each>
+      </p>
    </xsl:template>
    
-   <xsl:template mode="report" match="xsl:function/xsl:param">
-        <code>{@name}</code>
-        <xsl:for-each select="@as"> ({.})</xsl:for-each>
+   
+   <xsl:template mode="argstr" match="xsl:function/xsl:param">
+      <xsl:if test="position() gt 1">, </xsl:if>
+        <code>${@name}</code>
+        <xsl:for-each select="@as"> as {.}</xsl:for-each>
    </xsl:template>
    
    <xsl:template match="xsl:include | xsl:import" mode="report">
