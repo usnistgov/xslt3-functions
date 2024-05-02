@@ -30,7 +30,7 @@ echo Producing directory manifest ...
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 POM_FILE="${SCRIPT_DIR}/pom.xml"
-PIPELINE="${SCRIPT_DIR}/make-markdown-manifest.xpl"
+PIPELINE="${SCRIPT_DIR}/make-markdown-manifest.xproc"
 
 mvn -q \
     -f $POM_FILE \

@@ -6,7 +6,7 @@
     type="x3f:markdown-manifest" name="markdown-manifest">
     
     <!-- Purpose: Produce a directory manifest in Markdown, called `manifest.md` -->
-    <!-- Description: This is a wrapper XProc around 'directory-manifest.xpl' hiding its ports and writing to (named) file output -->
+    <!-- Description: This is a wrapper XProc around 'directory-manifest.xproc' hiding its ports and writing to (named) file output -->
     <!-- Option: provide 'path' as a URI e.g. file:///my/directory/ -->
     <!-- Output: a Markdown file 'manifest.md' in the current directory -->
     
@@ -16,7 +16,7 @@
     
     <!-- :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::    :::::     :::::   -->
     
-    <p:import href="directory-manifest.xpl"/>
+    <p:import href="directory-manifest.xproc"/>
 
     <x3f:directory-manifest name="manifest">
         <p:with-option name="path" select="$path"/>

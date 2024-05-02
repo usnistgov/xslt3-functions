@@ -57,6 +57,8 @@ It can be run locally on any platform with a configured Maven installation, usin
 
 Scripts for more granular or targeted application of XSpec under CI/CD are also available in the [XSpec-dev](xspec-dev/) application, requiring `bash` and `make`.
 
+TODO: Run [directory-manifest pipeline](./directory-manifest/) under CI/CD ...
+
 ### Rights and license
 
 See the [LICENSE.md](LICENSE.md) file. As work product of a Bureau of the Department of Commerce (U.S. Government), or of volunteers working in support of our projects, code in this repository is in the public domain unless specifically marked otherwise.

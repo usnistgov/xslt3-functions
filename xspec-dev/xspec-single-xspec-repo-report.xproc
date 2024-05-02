@@ -9,7 +9,7 @@
             type="mx:xspec-batch"
             version="1.0">
 
-   <!-- Like xspec-single-report.xpl, except uses the 'classic' XSpec distribution formatting XSLT  -->
+   <!-- Like xspec-single-report.xproc, except uses the 'classic' XSpec distribution formatting XSLT  -->
    
    <!-- Study reference: ../lib/xspec/src/harnesses/saxon/saxon-xslt-harness.xproc by Florent Georges -->
    
@@ -34,7 +34,7 @@
       <p:pipe port="result" step="determination"/>
    </p:output>-->
    
-   <p:import href="../lib/xspec/src/harnesses/harness-lib.xpl"/>
+   <p:import href="../lib/xspec/src/harnesses/harness-lib.xproc"/>
 
    <t:compile-xslt name="compile"><!-- thanks to gimsieke for tip on static-base-uri()
      this can be removed when issue is addressed https://github.com/xspec/xspec/issues/1832 -->      

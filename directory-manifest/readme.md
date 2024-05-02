@@ -1,5 +1,9 @@
 # XSLT / XProc Directory Manifest
 
+TODO: Update to support XProc 3.0 - match any version of XProc and handle it the same (overloaded XSLT)
+
+---
+
 Writes descriptions of your folder's XML-based contents, dynamically.
 
 Run XProc (1.0 or 3.0) providing the path to the subdirectory you want and it writes out a report.
@@ -60,11 +64,11 @@ On the command line, a typical XML Calabash call might look like either:
 
 The wrapper (simple interface) pipeline
 
-> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main /path/to/make-markdown-manifest.xpl dir=$HEREPATH
+> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main /path/to/make-markdown-manifest.xproc dir=$HEREPATH
 
 Alternatively, calling the core pipeline with options set to the same effect:
 
-> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=manifest.html -odirlist=/dev/null /path/to/directory-manifest.xpl dir=$HEREPATH
+> java -Xmx1024m -cp $CLASSPATH com.xmlcalabash.drivers.Main -omd=manifest.md -ohtml=manifest.html -odirlist=/dev/null /path/to/directory-manifest.xproc dir=$HEREPATH
 
 In the core pipeline, `-o` flags indicating output ports for XML Calabash, defined in the pipeline:
 
@@ -95,13 +99,13 @@ Inspect the scripts to see how the calls to Maven are constructed, including bin
 
 Morgana is an implementation of XProc 3.0.
 
-Install the application, adjust paths or scripts, and run the `make-markdown-manifest3.xpl` pipeline.
+Install the application, adjust paths or scripts, and run the `make-markdown-manifest3.xproc` pipeline.
 
 We had to add a copy of SaxonHE to the classpath so the application could find it. This is a known bug and you may not encounter it.
 
 ## Architecture
 
-The XProc pipeline `directory-manifest.xpl` executes three steps:
+The XProc pipeline `directory-manifest.xproc` executes three steps:
 
 - Polls the provided directory path for file contents to produce a file name list
 - Processes this poll through an XSLT filter, dispatching to each file of several known types

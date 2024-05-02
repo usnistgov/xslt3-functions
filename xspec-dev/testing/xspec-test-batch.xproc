@@ -63,7 +63,7 @@
       <p:pipe port="html-report" step="test-batch"/>
    </p:output>
    
-   <p:import href="../xspec-batch-report.xpl"/>
+   <p:import href="../xspec-batch-report.xproc"/>
 
    <!-- incipit -->
    <mx:xspec-batch name="test-batch">

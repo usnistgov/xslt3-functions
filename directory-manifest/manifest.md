@@ -2,7 +2,7 @@
 
 # Directory Manifest: `directory-manifest`
 
-April 3 2024 4:54 p.m. - 2024-04-03T16:54:41.77948-04:00 -
+April 30 2024 5:10 p.m. - 2024-04-30T17:10:56.132367-04:00 -
 
 Listing files suffixed `xml`, `xpl`, `sch`, `xsl`, `xslt`, `xsd` or `xspec`.
 
@@ -18,9 +18,9 @@ Limitations: Built out only for common cases seen so far, YMMV
 
 Note: Logic is extensible to handle analysis/synopsis of any XML document type
 
-### directory-manifest.xpl
+### directory-manifest.xproc
 
-Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (14 elements)
+Document 'c:directory' in namespace http://www.w3.org/ns/xproc-step (13 elements)
 
 ### html-to-markdown.xsl
 
@@ -34,7 +34,7 @@ Output: A block of Markdown, to be serialized using the 'text' method
 
 Note: Aims for Github Markdown more or less, but subject to adjustment, adaptation and extension
 
-### make-markdown-manifest.xpl
+### make-markdown-manifest.xproc
 
 XProc pipeline version 1.0 (3 steps)
 
@@ -42,13 +42,13 @@ Stores - `$path || '/manifest.md'`
 
 Purpose: Produce a directory manifest in Markdown, called `manifest.md`
 
-Description: This is a wrapper XProc around 'directory-manifest.xpl' hiding its ports and writing to (named) file output
+Description: This is a wrapper XProc around 'directory-manifest.xproc' hiding its ports and writing to (named) file output
 
 Output: a Markdown file 'manifest.md' in the current directory
 
 Runtime option `path` 
 
-Reads from (p:import) - `directory-manifest.xpl`
+Reads from (p:import) - `directory-manifest.xproc`
 
 ### make-markdown-manifest3.xpl
 
@@ -56,7 +56,7 @@ XProc pipeline version 3.0 (4 steps)
 
 Stores - `manifest.md`
 
-Purpose: Same as make-markdown-manifest.xpl, except using XProc 3.0
+Purpose: Same as make-markdown-manifest.xproc, except using XProc 3.0
 
 Runtime option `path` 
 
